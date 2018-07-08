@@ -1,0 +1,48 @@
+{
+  "error": {
+    "input": {
+      "required": "El campo es obligatorio",
+      "minlength": "Bajo el limite de {{p1}} caracteres admitidos",
+      "maxlength": "Sobre el limite de {{p1}} caracteres admitidos",
+      "validateEmail": "No es un correo electrónico valido",
+      "validateRUN": "No es un rut válido (Ej: 12345678-9)",
+      "validateUsername": "No es un nombre de usario válido",
+      "notEqualsPasswords": "La confirmación de la contraseña es incorrecta",
+      "usernameUnico": "El nombre de usuario no se encuentra disponible",
+      "emailUnico": "El correo electronico no se encuenta disponible",
+      "runUnico": "El RUN no se encuentra disponible"
+    }
+  },
+  "info": {
+    "input": {
+      "procesando": "Se esta procesando..."
+    },
+    "tooltip": {
+      "calendarMayor18Anios": "Debe ser mayor de 18 años",
+      "username": "Solo se admiten letras y numeros"
+    },
+    "msg": {
+      "exito" : "se realizaron los cambios exitosamente"
+    }
+  },
+  "dialogs": {
+    "error": {
+      "title": "Error"
+    },
+    "info": {
+      "title": "Información"
+    },
+    "cambiar-pass": {
+      "title": "Cambiar Contraseña"
+    },
+    "msg": {
+      "eliminar-usuario": "¿Esta seguro que desea eliminar el Usuario?",
+      "form-invalido": "el formulario no es válido"
+    }
+  },
+  "labels": {
+    "aceptar": "Aceptar",
+    "cancelar": "Cancelar",
+    "cerrar": "Cerrar"
+  }
+}

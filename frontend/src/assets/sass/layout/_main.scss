@@ -1,0 +1,285 @@
+@font-face {
+  font-family: 'gobCL';
+  font-weight: 300;
+  font-style: normal;
+  src: url("../../fonts/gobcl_light.eot?") format("eot"), url("../../fonts/gobcl_light.woff") format("woff"), url("../../fonts/gobcl_light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "gobCL";
+  font-weight: 500;
+  font-style: normal;
+  src: url("../../fonts/gobcl_regular.eot?") format("eot"), url("../../fonts/gobcl_regular.woff") format("woff"), url("../../fonts/gobcl_regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "gobCL";
+  font-weight: 700;
+  font-style: normal;
+  src: url("../../fonts/gobcl_bold.eot?") format("eot"), url("../../fonts/gobcl_bold.woff") format("woff"), url("../../fonts/gobcl_bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "gobCL";
+  font-weight: 900;
+  font-style: normal;
+  src: url("../../fonts/gobcl_heavy.eot?") format("eot"), url("../../fonts/gobcl_heavy.woff") format("woff"), url("../../fonts/gobcl_heavy.ttf") format("truetype");
+}
+
+.gobcl {
+  font-family: "gobCL", Tahoma, Verdana, Segoe, sans-serif;
+}
+
+* {
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "gobCL", Arial, Helvetica, sans-serif;
+  font-size: $fontSize;
+  color: $textColor;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+* {
+  @include box-sizing(border-box);
+  font-family: "gobCL", Arial, Helvetica, sans-serif;
+}
+
+.ui-widget {
+  font-family: "gobCL", Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: $textSecondaryColor;
+  text-decoration: none;
+  transition: all ease .3s;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.gob_logo {
+  background: url("../../images/big_logo.jpg") top center no-repeat;
+  width: 180px;
+  height: 180px;
+  margin: 50px auto 25px;
+  display: block;
+}
+
+#login_panel {
+  max-width: 400px;
+  margin: 0 auto 40px;
+  border-radius: 11px;
+  box-shadow: 0 3px 21px rgba(0, 0, 0, 0.25);
+  padding: 20px 20px 30px;
+
+  h2 {
+    margin-top: 0;
+    color: $gobBlueColor;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  input, button {
+    margin-bottom: 10px;
+  }
+
+  button {
+    border-radius: 0;
+    line-height: 35px;
+    height: 35px;
+    padding: 0 20px;
+    background: $gobGrayColor;
+    border: none;
+
+    &:hover {
+      background: $gobBlueColor;
+    }
+  }
+
+}
+
+.ui-widget-header {
+  background-color: #f3f3f3;
+}
+
+.ui-widget-header .ui-button,
+.ui-widget-content .ui-button,
+.ui-widget.ui-button,
+.ui-button {
+  background: $gobBlueColor;
+  color: #fff;
+  border: none !important;
+  padding: 0 15px;
+
+  .ui-button-text.ui-clickable {
+
+  }
+}
+
+.ui-datatable .ui-datatable-thead > tr > th,
+.ui-datatable thead th {
+  text-align: left;
+  font-weight: bold;
+  color: #fff;
+  background: $gobBlueColor;
+  font-size: 15px;
+  padding: 7px;
+  line-height: 1;
+}
+
+.ui-datatable .ui-datatable-data > tr > td {
+
+  line-height: 1;
+  font-size: 14px;
+  white-space: normal;
+
+  .ui-button {
+    background: $gobGrayColor;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 0;
+
+    &:hover {
+      background-color: $gobDarkGrayColor;
+    }
+  }
+}
+
+.botonera-sup-tabla {
+  display: block;
+  text-align: right;
+
+  button {
+    display: inline-block;
+    min-width: 120px;
+    padding: 0 20px;
+    line-height: 35px;
+    height: 35px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  }
+}
+
+.top_minus {
+  margin-top: -34px;
+}
+
+.btn-link {
+  display: block;
+  &:hover {
+    color: $gobBlueColor;
+  }
+}
+
+.ui-calendar {
+  display: block;
+}
+
+.ui-message {
+  margin: 5px 0 3px;
+  i.fa {
+    margin: 0 0 !important;
+  }
+}
+
+.ui-dropdown {
+  .ui-dropdown-label {
+    height: 35px;
+    line-height: 35px;
+    padding: 0 7px;
+  }
+}
+
+.ui-calendar {
+  display: block;
+  height: 35px;
+  line-height: 35px;
+  padding: 0;
+
+  input.ui-inputtext {
+    padding: 0 7px;
+  }
+  .ui-datepicker-trigger.ui-button {
+    height: 37px;
+  }
+}
+
+.form-group {
+  i.fa {
+    display: inline-block;
+    margin: 0 7px;
+    font-size: 15px;
+    color: red;
+  }
+}
+
+.ui-tooltip {
+  .ui-tooltip-text {
+    line-height: 15px;
+    padding: 7px;
+  }
+}
+
+.card {
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 20px auto 30px;
+}
+
+.card.gray,
+.ui-datatable .ui-paginator-bottom {
+  background: #f3f3f3;
+}
+
+.email_shortener {
+  white-space: pre-wrap;
+  display: block;
+  width: 100%;
+  word-break: break-all;
+}
+
+.btn_actions {
+  text-align: center;
+}
+
+.ui-tooltip-top .ui-tooltip-arrow {
+  border-top-color: #f59e00;
+}
+
+.ui-tooltip-bottom .ui-tooltip-arrow {
+  border-bottom-color: #f59e00;
+}
+
+.ui-tooltip-left .ui-tooltip-arrow {
+  border-left-color: #f59e00;
+}
+
+.ui-tooltip-right .ui-tooltip-arrow {
+  border-right-color: #f59e00;
+}
+
+.ui-tooltip .ui-tooltip-text {
+  background: #f59e00;
+  font-size: 15px;
+  line-height: 1;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,237 @@
+.layout-wrapper {
+    .layout-topbar {
+        height: 64px;
+        background-color: $topbarBgColor;
+        padding: 1em;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        padding-top: 0;
+
+        box-shadow: 0 3px 3px rgba(0,0,0,.15);
+
+        .menu-btn {
+            display: inline-block;
+            vertical-align: middle;
+
+            i {
+                font-size: 1.5em;
+            }
+        }
+
+        .logo {
+            margin-left: 1.25em;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .topbar-button {
+            background: $gobGrayColor;
+            border-radius: 0;
+            border: none;
+            color: #fff;
+            height: 2em;
+            min-width: 2em;
+            float: right;
+            display: block;
+            font-size: 1em;
+
+            .ui-button-icon-right {
+                width: 1em;
+                height: 1em;
+            }
+        }
+
+        span.ng-star-inserted {
+            float: right;
+            font-size: 13px;
+            padding-top: 5px;
+            position: relative;
+            margin-top: 3px;
+            display: block;
+            margin-right: 10px;
+        }
+        a.ng-star-inserted {
+            float: right;
+            position: absolute;
+            top: 30px;
+            right: 20px;
+            font-size: 13px;
+        }
+
+    }
+}
+
+@media (max-width: 1024px) {
+    .layout-wrapper {
+        .layout-topbar {
+            .topbar-button {
+                .ui-button-text {
+                    display: none;
+                }
+
+                .ui-button-icon-right {
+                    right: 50%;
+                    margin-right: -.6em;
+                }  
+            }
+        }
+    }
+}
+
+.layout-wrapper {
+    .topbar_container {
+        position: relative;
+        padding: 40px 20px;
+        left: 0;
+        right: 0;
+        background: #FE6565;
+        color: #fff;
+        margin: 0 -15px;
+
+        h1 {
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        p {
+            margin-top: 5px;
+        }
+    }
+
+}
+
+
+.clearfix:after,
+.clearfix:before {
+    clear: both;
+    display: table;
+    content: ' ';
+}
+
+.toolbar_content {
+    display: block;
+    float: right;
+    padding: 15px 0;
+
+    .btn.btn-default {
+        border: 2px solid #fff;
+        border-radius: 0;
+        display: inline-block;
+        margin: 0 0 5px;
+        color: #fff;
+        line-height: 40px;
+        padding: 0 0;
+        text-align: center;
+        min-width: 40px;
+        height: 42px;
+
+        &:hover {
+            border-color: transparent;
+            background: rgba(0,0,0,0.35);
+        }
+        .fa {
+            font-size: 19px;
+        }
+        span {
+            display: inline-block;
+            padding: 0 7px;
+        }
+    }
+
+}
+
+.banner_menu {
+    display: block;
+    clear: both;
+    min-height: 50px;
+    background: #0A132D;
+    line-height: 50px;
+    padding: 0 15px;
+
+    .list-inline-item {
+        padding: 0 7px;
+        color: #fff;
+        line-height: 50px;
+
+        &:hover {
+            text-decoration: underline !important;
+        }
+    }
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+.link_redes {
+    background: none;
+    border-bottom: 2px solid $gobGrayColor;
+    width: calc(100% - 40px);
+    margin: 0 auto 30px;
+    line-height: 1;
+    
+    a.list-inline-item {
+        color: $gobGrayColor;
+        font-size: 30px;
+
+        &:hover {
+            color: $gobDarkGrayColor;
+            text-decoration: none !important;
+        }
+    }
+    span {
+        color: $gobDarkGrayColor;
+        display: inline-block;
+        line-height: 50px;
+        padding: 0 7px;
+        vertical-align: top;
+    }
+}
+
+@media (max-width: 768px) {
+    .layout-wrapper .topbar_container {
+        padding:20px;
+        h1 {
+            font-size: 25px;
+        }
+    }
+    .banner_menu {
+        display: none;
+    }
+
+    .toolbar_content {
+        float: none;
+        display: block;
+        text-align: center;
+        padding: 0 0;
+    }
+    .banner_menu.link_redes {
+        display: block;
+        text-align: center !important;
+    }
+    
+    .link_redes span {
+        display: none;
+        text-align: center;
+    }
+    .botonera {
+        button {
+            display: block;
+            float: none;
+            line-height: 40px;
+            margin-bottom: 5px;
+            width: 100%;
+            height: 40px;
+        }
+    }
+}
+

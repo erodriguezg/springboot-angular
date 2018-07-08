@@ -1,0 +1,20 @@
+node
+node_modules
+prod
+dist
+out
+app/**/*.js
+login/**/*.js
+*.log
+*.map
+*.d.ts
+!typings.d.ts
+*.DS_Store
+typings
+.vscode/
+.idea/
+yarn.lock
+.sass-cache/
+constants_ambient.js
+### MAC ####
+.DS_Store

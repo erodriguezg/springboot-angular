@@ -1,0 +1,25 @@
+
+<i class="gob_logo"></i>
+
+
+<div class="card login-panel ui-fluid" id="login_panel">
+		
+	<h2>Iniciar Sesión</h2>
+
+	<span class="md-inputfield">
+		<label>Nombre Usuario</label>
+		<input type="text" pInputText [(ngModel)]="username" autocomplete="off" />
+	</span>
+
+	<span class="md-inputfield">
+		<label>Contraseña</label>
+		<input type="password" [(ngModel)]="password" (keyup.enter)="login()" pInputText autocomplete="off" />
+	</span>
+
+	<button type="button" pButton label="Ingresar" class="btn green-btn" (click)="login()"></button>
+
+	<a href="#" class="btn btn-link text-center align-content-center">¿Olvidaste tu contraseña?</a>
+
+</div>
+
+<p-growl [(value)]="msgs" [sticky]="false" ></p-growl>

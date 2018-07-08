@@ -1,0 +1,79 @@
+.layout-wrapper {
+    h1 {
+        color: $gobBlueColor;
+        display: block;
+        margin-top: 20px;
+    }
+
+    .layout-main {
+        .layout-content {
+            padding: 64px 0;
+            width: calc(100% - 30px);
+            margin: 0 auto;
+            min-height: calc(100vh - 55px);
+        }
+
+        .layout-main-mask {
+            display: none;
+        }
+
+        .layout-footer {
+            width: 100%;
+            padding: 1em 1.5em;
+            background-color: $footerBgColor;
+            border-top: 2px dotted $footerBorderColor;
+
+            .footer-text-right {
+                margin-top: .5em;
+
+                span {
+                    vertical-align: middle;
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 11px 2px rgba(0, 123, 255, 0.25);
+    }
+    .botonera:before,
+    .botonera:after {
+        display: table;
+        content: ' ';
+        clear: both;
+    }
+    .img-fluid {
+        margin-bottom: 15px;
+    }
+
+    button.btn-default {
+        background: $gobGrayColor;
+    }
+    button.btn-success {
+        background: #20c997;
+    }
+    button.btn-warning {
+        background: #ffc107;
+    }
+    button.btn-danger {
+        background: #ffc107;
+    }
+
+    .botonera {
+        display: block;
+        padding: 10px 0px;
+        margin-bottom: 15px;
+
+        .btn-success {
+            float: right;
+        }
+    }
+    .ui-g-1, .ui-g-2, .ui-g-3, .ui-g-4, .ui-g-5, .ui-g-6, .ui-g-7, .ui-g-8, .ui-g-9, .ui-g-10, .ui-g-11, .ui-g-12 {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+    .form-group {
+        margin-bottom: 7px;
+    }
+}
