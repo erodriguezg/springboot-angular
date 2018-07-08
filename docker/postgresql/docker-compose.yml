@@ -1,0 +1,12 @@
+PostgreSQL:
+  restart: always
+  image: sameersbn/postgresql:9.6-2
+  ports:
+    - "5432:5432"
+  environment:
+    - DEBUG=false
+    - DB_USER=postgres
+    - DB_PASS=postgres
+    - DB_NAME=postgres
+  volumes:
+    - ./data:/var/lib/postgresql
