@@ -2,8 +2,9 @@ package com.github.erodriguezg.springbootangular.utils;
 
 public class ConstantesUtil {
 
-    public static final String SPRING_BOOT_PROFILE_NAME_DEVELOPMENT = "development";
-    public static final String SPRING_BOOT_PROFILE_NAME_PRODUCTION = "production";
+    public static final String PROFILE_NAME_DEV = "DEV";
+    public static final String PROFILE_NAME_QA = "QA";
+    public static final String PROFILE_NAME_PROD = "PROD";
 
     public static final String MSJ_EXITO = "Todos los cambios se realizaron con éxito";
     public static final String MSJ_ERROR_ENTRADA = "Entradas invalidas";

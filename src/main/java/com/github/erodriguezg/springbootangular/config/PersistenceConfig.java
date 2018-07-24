@@ -44,7 +44,7 @@ public class PersistenceConfig {
 
 	@Bean
 	@Qualifier(QUALIFIER_JPA_PROPERTIES)
-	@Profile(ConstantesUtil.SPRING_BOOT_PROFILE_NAME_DEVELOPMENT)
+	@Profile(ConstantesUtil.PROFILE_NAME_DEV)
 	public Properties jpaPropertiesMapDevelopment() {
 		Properties jpaProperties = crearJpaPropertiesComun();
 		jpaProperties.put("hibernate.show_sql", "true");
@@ -54,7 +54,9 @@ public class PersistenceConfig {
 
 	@Bean
 	@Qualifier(QUALIFIER_JPA_PROPERTIES)
-	@Profile(ConstantesUtil.SPRING_BOOT_PROFILE_NAME_PRODUCTION)
+	@Profile({ConstantesUtil.PROFILE_NAME_PROD,
+			ConstantesUtil.PROFILE_NAME_QA
+	})
 	public Properties jpaPropertiesMapProduction() {
 		Properties jpaProperties = crearJpaPropertiesComun();
 		jpaProperties.put("hibernate.show_sql", "false");

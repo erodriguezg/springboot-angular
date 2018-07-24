@@ -8,14 +8,15 @@ Aplicación plantilla con componentes PrimeNG
 3) Crear una base datos postgresql 9.x vacía
 
 ## LEVANTAR AMBIENTE DESARROLLO
-1) copiar plantilla src/main/resources/application.properties.plantilla a src/main/resources/application.properties. Luego configurar como corresponda al ambiente.
-2) Lanzar comando: "FLYWAY: Clean"
-3) Lanzar comando: "FLYWAY: Migrate"
-4) Lanzar comando: "BACKEND: Run"
-5) Lanzar comando: "FRONTEND: Instalar"
-6) Lanzar comando: "FRONTEND: Compilar"
-7) Lanzar comando: "FRONTEND: Run"
-8) Abrir navegador en: "localhost:4000". Backend queda en "localhost:8080"
+1) Configurar src/main/resources/application-DEV.properties. En vez de sobreescribir valores se recomienda configurar variables de entorno en el ide por cada propiedad.
+2) Agregar variable de entorno en el IDE: spring.profiles.active=DEV
+3) Lanzar comando: "FLYWAY: Clean"
+4) Lanzar comando: "FLYWAY: Migrate"
+5) Lanzar comando: "BACKEND: Run"
+6) Lanzar comando: "FRONTEND: Instalar"
+7) Lanzar comando: "FRONTEND: Compilar"
+8) Lanzar comando: "FRONTEND: Run"
+9) Abrir navegador en: "localhost:4000". Backend queda en "localhost:8080"
 
 #### NOTA: estos comandos se guardan en el IDE (eclipse, intellij o netbeans) como comandos maven.
 
