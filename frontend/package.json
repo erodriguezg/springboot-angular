@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build-prod": "yarn install && ng build --prod",
-    "build-dev": "yarn install && ng build -dev -oh all",
+    "build-dev": "yarn install && ng build -dev --aot -oh all",
     "build-dev-verbose": "yarn install && ng build -dev --verbose",
     "build-qa": "yarn install && ng build --env=qa --aot -oh all",
     "test": "yarn install && ng test",
