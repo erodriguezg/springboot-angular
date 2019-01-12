@@ -1,0 +1,23 @@
+app:
+  jwt:
+    expiration-minutes: 5
+    secret-phrase: 895d1b88-76ab-4cdb-b867-6467b9195fca
+  url:
+    backend: http://localhost:8080
+    frontend: http://localhost:4200
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springboot-angular
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata: false
+  profiles:
+    active: DEV
+logging:
+  level:
+    root: OFF
+

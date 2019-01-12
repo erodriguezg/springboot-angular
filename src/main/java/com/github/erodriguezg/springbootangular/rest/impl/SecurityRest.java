@@ -1,6 +1,7 @@
 package com.github.erodriguezg.springbootangular.rest.impl;
 
-import com.github.erodriguezg.springbootangular.rest.SecurityRest;
+import com.github.erodriguezg.javautils.CodecUtils;
+import com.github.erodriguezg.security.jwt.TokenService;
 import com.github.erodriguezg.springbootangular.rest.dto.CredencialesDto;
 import com.github.erodriguezg.springbootangular.rest.dto.RefreshTokenDto;
 import com.github.erodriguezg.springbootangular.rest.dto.RespuestaLoginDto;
@@ -8,8 +9,6 @@ import com.github.erodriguezg.springbootangular.security.SecurityMappings;
 import com.github.erodriguezg.springbootangular.services.UsuarioService;
 import com.github.erodriguezg.springbootangular.services.dto.UsuarioDto;
 import com.github.erodriguezg.springbootangular.utils.ConstantesUtil;
-import com.github.erodriguezg.javautils.CodecUtils;
-import com.github.erodriguezg.security.jwt.TokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/security")
-public class SecurityRestImpl implements SecurityRest {
+public class SecurityRest {
 
-    private static final Logger log = LoggerFactory.getLogger(SecurityRestImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(SecurityRest.class);
 
     private static final String ERROR_LOGIN = "Usuario o contraseña incorrecto";
 
@@ -48,7 +47,6 @@ public class SecurityRestImpl implements SecurityRest {
 
     @PostMapping("/login")
     @PreAuthorize("permitAll()")
-    @Override
     public RespuestaLoginDto login(@RequestBody @Valid CredencialesDto credenciales, BindingResult bindResult) {
 
         if (bindResult.hasErrors()) {
@@ -93,7 +91,6 @@ public class SecurityRestImpl implements SecurityRest {
 
     @PostMapping("/refreshToken")
     @PreAuthorize("isAuthenticated()")
-    @Override
     public RefreshTokenDto refreshToken() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

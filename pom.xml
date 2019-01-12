@@ -40,6 +40,8 @@
 		<version.postgres>42.2.2</version.postgres>
 		<version.urlrewrite>4.0.4</version.urlrewrite>
 		<version.jjwt>0.7.0</version.jjwt>
+		<version.flyway>5.2.4</version.flyway>
+        <version.logstash-gelf>1.12.1</version.logstash-gelf>
 
 		<version.apache-poi>3.17</version.apache-poi>
 		<version.apache-tika>1.18</version.apache-tika>
@@ -147,15 +149,8 @@
 			<version>${version.jjwt}</version>
 		</dependency>
 
-		<!-- url rewrite -->
-
-		<dependency>
-			<groupId>org.tuckey</groupId>
-			<artifactId>urlrewritefilter</artifactId>
-			<version>${version.urlrewrite}</version>
-		</dependency>
-
 		<!-- Apache Commons -->
+
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
@@ -212,6 +207,22 @@
 			si es necesario <dependency> <groupId>org.apache.tika</groupId> <artifactId>tika-parsers</artifactId> 
 			<version>${version.apache-tika}</version> </dependency -->
 
+
+		<!-- FlyWay DB Migrations -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>${version.flyway}</version>
+		</dependency>
+
+		<!-- LOG -->
+
+		<dependency>
+			<groupId>biz.paluch.logging</groupId>
+			<artifactId>logstash-gelf</artifactId>
+			<version>${version.logstash-gelf}</version>
+		</dependency>
+
 		<!-- test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -223,20 +234,6 @@
 
 	<build>
 		<plugins>
-
-			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>src/main/resources/frontend-dist</directory>
-							<includes>
-								<include>**</include>
-							</includes>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -262,26 +259,6 @@
 				</executions>
 			</plugin>
 			
-			<plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <configuration>
-                    <url>${plugin.flyway.url}</url>
-                    <user>${plugin.flyway.user}</user>
-                    <password>${plugin.flyway.password}</password>
-                    <locations>
-                        <location>filesystem://${basedir}/sql/</location>
-                    </locations>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.postgresql</groupId>
-                        <artifactId>postgresql</artifactId>
-                        <version>${version.postgres}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
 			<!-- pruebas de integracion con verify -->
 			
 			<plugin>

@@ -1,8 +1,7 @@
 package com.github.erodriguezg.springbootangular.rest.impl;
 
-import com.github.erodriguezg.springbootangular.rest.RegionRest;
-import com.github.erodriguezg.springbootangular.services.RegionService;
-import com.github.erodriguezg.springbootangular.services.dto.RegionDto;
+import com.github.erodriguezg.springbootangular.services.PerfilService;
+import com.github.erodriguezg.springbootangular.services.dto.PerfilDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,17 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/regiones")
-public class RegionRestImpl implements RegionRest{
+@RequestMapping("/perfiles")
+public class PerfilRest {
 
     @Autowired
-    private RegionService regionService;
+    private PerfilService perfilService;
 
-    @GetMapping("/todas")
+    @GetMapping("/todos")
     @PreAuthorize("isAuthenticated()")
-    @Override
-    public List<RegionDto> traerTodas() {
-        return regionService.traerTodas();
+    public List<PerfilDto> traerTodos() {
+        return this.perfilService.traerTodos();
     }
 
 }

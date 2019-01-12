@@ -21,7 +21,7 @@ Aplicación plantilla con componentes PrimeNG
 #### NOTA: estos comandos se guardan en el IDE (eclipse, intellij o netbeans) como comandos maven.
 
 ### Comandos MAVEN BACKEND:
-* BACKEND: Run) spring-boot:run -Duser.language=es -Duser.region=CL -Dfile.encoding=UTF-8 -Dspring.profiles.active=DEV
+* BACKEND: Run) spring-boot:run -Duser.language=es -Duser.region=CL -Dfile.encoding=UTF-8
 * FLYWAY: Clean) flyway:clean -Dplugin.flyway.url=jdbc:postgresql://localhost:5432/springboot-angular -Dplugin.flyway.user=postgres -Dplugin.flyway.password=postgres
 * FLYWAY: Migrate) flyway:migrate -Dplugin.flyway.url=jdbc:postgresql://localhost:5432/springboot-angular -Dplugin.flyway.user=postgres -Dplugin.flyway.password=postgres
 

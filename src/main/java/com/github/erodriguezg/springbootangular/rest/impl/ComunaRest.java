@@ -1,6 +1,5 @@
 package com.github.erodriguezg.springbootangular.rest.impl;
 
-import com.github.erodriguezg.springbootangular.rest.ComunaRest;
 import com.github.erodriguezg.springbootangular.services.ComunaService;
 import com.github.erodriguezg.springbootangular.services.dto.ComunaDto;
 import com.github.erodriguezg.springbootangular.services.dto.ProvinciaDto;
@@ -17,16 +16,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/comunas")
-public class ComunaRestImpl implements ComunaRest {
+public class ComunaRest {
 
-    private static final Logger log = LoggerFactory.getLogger(ComunaRestImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(ComunaRest.class);
 
     @Autowired
     private ComunaService comunaService;
 
     @GetMapping("/id/{idComuna}")
     @PreAuthorize("isAuthenticated()")
-    @Override
     public ComunaDto traerComunaPorIdComuna(@PathVariable("idComuna") Integer idComuna) {
         log.debug("traer comuna por id: {}", idComuna);
         return this.comunaService.traerPorId(idComuna);
@@ -34,7 +32,6 @@ public class ComunaRestImpl implements ComunaRest {
 
     @GetMapping("/provincia/{idProvincia}")
     @PreAuthorize("isAuthenticated()")
-    @Override
     public List<ComunaDto> traerComunasPorProvincia(@PathVariable("idProvincia") int idProvincia) {
         log.debug("traer comunas por provincia id: {}", idProvincia);
         return this.comunaService.traerPorProvincia(new ProvinciaDto(idProvincia));

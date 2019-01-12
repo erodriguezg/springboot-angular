@@ -1,6 +1,5 @@
 package com.github.erodriguezg.springbootangular.rest.impl;
 
-import com.github.erodriguezg.springbootangular.rest.ProvinciaRest;
 import com.github.erodriguezg.springbootangular.services.ProvinciaService;
 import com.github.erodriguezg.springbootangular.services.dto.ProvinciaDto;
 import com.github.erodriguezg.springbootangular.services.dto.RegionDto;
@@ -15,14 +14,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/provincias")
-public class ProvinciaRestImpl implements ProvinciaRest{
+public class ProvinciaRest {
 
     @Autowired
     private ProvinciaService provinciaService;
 
     @GetMapping("/region/{idRegion}")
     @PreAuthorize("isAuthenticated()")
-    @Override
     public List<ProvinciaDto> traerPorIdRegion(@PathVariable("idRegion") Integer idRegion) {
         return provinciaService.traerPorRegion(new RegionDto(idRegion));
     }

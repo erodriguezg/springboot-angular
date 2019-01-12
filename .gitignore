@@ -1,8 +1,5 @@
-docker/.mongodata
-src/main/resources/application.properties
-src/main/resources/frontend-dist
+src/main/resources/application.yml
 target/
-!.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
 .apt_generated
