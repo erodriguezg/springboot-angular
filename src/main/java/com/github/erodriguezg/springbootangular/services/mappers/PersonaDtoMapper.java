@@ -16,7 +16,7 @@ public class PersonaDtoMapper {
         dto.setApMaterno(entidad.getApellidoMaterno());
         dto.setApPaterno(entidad.getApellidoPaterno());
         dto.setEmail(entidad.getEmail());
-        dto.setFechaNacimiento(entidad.getFechanacimiento());
+        dto.setFechaNacimiento(entidad.getFechaNacimiento());
         dto.setRun(entidad.getRun());
         dto.setNombres(entidad.getNombres());
         return dto;
@@ -31,7 +31,7 @@ public class PersonaDtoMapper {
         entidad.setApellidoPaterno(personaDto.getApPaterno());
         entidad.setComuna(null);
         entidad.setEmail(personaDto.getEmail());
-        entidad.setFechanacimiento(personaDto.getFechaNacimiento());
+        entidad.setFechaNacimiento(personaDto.getFechaNacimiento());
         entidad.setIdPersona(usuarioDto.getId());
         entidad.setNombres(personaDto.getNombres());
         entidad.setRun(personaDto.getRun());

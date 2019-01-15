@@ -96,22 +96,12 @@ public class UsuarioService {
     }
 
     public long buscarRowCount(UsuarioFiltroDto filtroDto) {
-        Specification<Usuario> userSpecification = filtroToSpecification(filtroDto);
+        Specification<Usuario> userSpecification = usuarioRepository.filtroToSpecification(filtroDto);
         return usuarioRepository.count(userSpecification);
     }
 
-    private Specification<Usuario> filtroToSpecification(UsuarioFiltroDto filtroDto) {
-        return (user, cq, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            Path<Persona> persona = user.get("persona");
-            if(StringUtils.isNotBlank(filtroDto.getApMaterno())) {
-                predicates.add(cb.like(persona.get("apellidoMaterno"), "%" + filtroDto.getApMaterno() + "%"));
-            }
-            return cb.and(predicates.toArray(new Predicate[]{}));
-        };
-    }
     public List<UsuarioDto> buscar(UsuarioFiltroDto filtroDto, int inicio, int fin) {
-        Specification<Usuario> userSpecification = filtroToSpecification(filtroDto);
+        Specification<Usuario> userSpecification = usuarioRepository.filtroToSpecification(filtroDto);
         return usuarioRepository.findAll(userSpecification, PageRequest.of(inicio, fin - inicio))
                 .stream()
                 .map(usuario -> usuarioMapper.toUsuarioDto(usuario))

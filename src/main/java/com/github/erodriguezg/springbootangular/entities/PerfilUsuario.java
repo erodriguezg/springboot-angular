@@ -18,7 +18,7 @@ public class PerfilUsuario implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-    @OneToMany(mappedBy = "idPerfilUsuario")
+    @OneToMany(mappedBy = "perfil")
     private Set<Usuario> usuarioSet;
 
     public PerfilUsuario() {

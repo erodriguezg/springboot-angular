@@ -41,7 +41,7 @@ public class Usuario implements Serializable {
 
 	@JoinColumn(name = "id_perfil_usuario", referencedColumnName = "id_perfil_usuario")
 	@ManyToOne(optional = false)
-	private PerfilUsuario idPerfilUsuario;
+	private PerfilUsuario perfil;
 
 	@JoinColumn(name = "id_persona")
 	@OneToOne(optional = false)
@@ -89,12 +89,12 @@ public class Usuario implements Serializable {
 		this.password = password;
 	}
 
-	public PerfilUsuario getIdPerfilUsuario() {
-		return idPerfilUsuario;
+	public PerfilUsuario getPerfil() {
+		return perfil;
 	}
 
-	public void setIdPerfilUsuario(PerfilUsuario idPerfilUsuario) {
-		this.idPerfilUsuario = idPerfilUsuario;
+	public void setPerfil(PerfilUsuario perfil) {
+		this.perfil = perfil;
 	}
 
 	public Persona getPersona() {
@@ -130,7 +130,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario{" + "idPersona=" + idPersona + ", username='" + username + '\'' + ", idPerfilUsuario="
-				+ idPerfilUsuario + ", persona=" + persona + '}';
+		return "Usuario{" + "idPersona=" + idPersona + ", username='" + username + '\'' + ", perfil="
+				+ perfil + ", persona=" + persona + '}';
 	}
 }

@@ -28,7 +28,7 @@ import java.util.Objects;
 		@NamedQuery(name = "Persona.findByNombres", query = "SELECT p FROM Persona p WHERE p.nombres = :nombres"),
 		@NamedQuery(name = "Persona.findByApellidoPaterno", query = "SELECT p FROM Persona p WHERE p.apellidoPaterno = :apellidoPaterno"),
 		@NamedQuery(name = "Persona.findByApellidoMaterno", query = "SELECT p FROM Persona p WHERE p.apellidoMaterno = :apellidoMaterno"),
-		@NamedQuery(name = "Persona.findByFechanacimiento", query = "SELECT p FROM Persona p WHERE p.fechanacimiento = :fechanacimiento"),
+		@NamedQuery(name = "Persona.findByFechanacimiento", query = "SELECT p FROM Persona p WHERE p.fechaNacimiento = :fechaNacimiento"),
 		@NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono"),
 		@NamedQuery(name = "Persona.findByEmail", query = "SELECT p FROM Persona p WHERE p.email = :email") })
 public class Persona implements Serializable {
@@ -61,9 +61,9 @@ public class Persona implements Serializable {
 	@Column(name = "apellido_materno")
 	private String apellidoMaterno;
 
-	@Column(name = "fechanacimiento")
+	@Column(name = "fechaNacimiento")
 	@Temporal(TemporalType.DATE)
-	private Date fechanacimiento;
+	private Date fechaNacimiento;
 
 	@Column(name = "telefono")
 	private String telefono;
@@ -130,12 +130,12 @@ public class Persona implements Serializable {
 		this.apellidoMaterno = apellidoMaterno;
 	}
 
-	public Date getFechanacimiento() {
-		return fechanacimiento;
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 
-	public void setFechanacimiento(Date fechanacimiento) {
-		this.fechanacimiento = fechanacimiento;
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public String getTelefono() {
@@ -194,7 +194,7 @@ public class Persona implements Serializable {
 	public String toString() {
 		return "Persona{" + "idPersona=" + idPersona + ", run=" + run + ", nombres='" + nombres + '\''
 				+ ", apellidoPaterno='" + apellidoPaterno + '\'' + ", apellidoMaterno='" + apellidoMaterno + '\''
-				+ ", fechanacimiento=" + fechanacimiento + ", telefono='" + telefono + '\'' + ", email='" + email + '\''
+				+ ", fechaNacimiento=" + fechaNacimiento + ", telefono='" + telefono + '\'' + ", email='" + email + '\''
 				+ '}';
 	}
 
