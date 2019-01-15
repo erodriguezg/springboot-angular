@@ -1,6 +1,6 @@
 package com.github.erodriguezg.springbootangular.rest.impl;
 
-import com.github.erodriguezg.springbootangular.services.PerfilService;
+import com.github.erodriguezg.springbootangular.services.PerfilUsuarioService;
 import com.github.erodriguezg.springbootangular.services.dto.PerfilDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,7 +15,7 @@ import java.util.List;
 public class PerfilRest {
 
     @Autowired
-    private PerfilService perfilService;
+    private PerfilUsuarioService perfilService;
 
     @GetMapping("/todos")
     @PreAuthorize("isAuthenticated()")

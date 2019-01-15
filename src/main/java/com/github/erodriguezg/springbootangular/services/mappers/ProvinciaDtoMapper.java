@@ -3,7 +3,7 @@ package com.github.erodriguezg.springbootangular.services.mappers;
 import org.springframework.stereotype.Component;
 
 import com.github.erodriguezg.springbootangular.services.dto.ProvinciaDto;
-import com.github.erodriguezg.springbootangular.services.entities.Provincia;
+import com.github.erodriguezg.springbootangular.entities.Provincia;
 
 @Component
 public class ProvinciaDtoMapper {

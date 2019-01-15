@@ -1,4 +1,4 @@
-package com.github.erodriguezg.springbootangular.services.entities;
+package com.github.erodriguezg.springbootangular.entities;
 
 import java.io.Serializable;
 import java.util.Objects;

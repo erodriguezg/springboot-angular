@@ -1,6 +1,6 @@
 app:
   jwt:
-    expiration-minutes: 5
+    expiration-minutes: 30
     secret-phrase: 895d1b88-76ab-4cdb-b867-6467b9195fca
   url:
     backend: http://localhost:8080

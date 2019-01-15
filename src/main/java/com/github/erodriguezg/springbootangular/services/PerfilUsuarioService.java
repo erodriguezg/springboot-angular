@@ -1,12 +1,10 @@
-package com.github.erodriguezg.springbootangular.services.impl;
+package com.github.erodriguezg.springbootangular.services;
 
-import com.github.erodriguezg.springbootangular.services.PerfilService;
-import com.github.erodriguezg.springbootangular.services.dao.PerfilUsuarioDao;
+import com.github.erodriguezg.springbootangular.repository.PerfilUsuarioRepository;
 import com.github.erodriguezg.springbootangular.services.dto.PerfilDto;
 import com.github.erodriguezg.springbootangular.services.mappers.PerfilDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,19 +12,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Scope(proxyMode = ScopedProxyMode.INTERFACES)
-public class PerfilServiceImpl implements PerfilService {
+@Transactional(readOnly = true)
+public class PerfilUsuarioService {
 
     @Autowired
-    private PerfilUsuarioDao perfilUsuarioDao;
+    private PerfilUsuarioRepository perfilUsuarioRepository;
 
     @Autowired
     private PerfilDtoMapper perfilUsuarioMapper;
 
     @Transactional(readOnly = true)
-    @Override
     public List<PerfilDto> traerTodos() {
-        return perfilUsuarioDao.traerTodos().stream().map(perfilUsuarioMapper::toPerfilDto)
+        return perfilUsuarioRepository
+                .findAll(Sort.by(Sort.Direction.ASC, "nombre"))
+                .stream()
+                .map(perfilUsuarioMapper::toPerfilDto)
                 .collect(Collectors.toList());
     }
 

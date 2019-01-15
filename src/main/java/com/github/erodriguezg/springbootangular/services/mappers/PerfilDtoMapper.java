@@ -3,7 +3,7 @@ package com.github.erodriguezg.springbootangular.services.mappers;
 import org.springframework.stereotype.Component;
 
 import com.github.erodriguezg.springbootangular.services.dto.PerfilDto;
-import com.github.erodriguezg.springbootangular.services.entities.PerfilUsuario;
+import com.github.erodriguezg.springbootangular.entities.PerfilUsuario;
 
 @Component
 public class PerfilDtoMapper {

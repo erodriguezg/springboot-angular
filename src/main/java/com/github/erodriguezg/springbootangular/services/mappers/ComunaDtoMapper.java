@@ -3,7 +3,7 @@ package com.github.erodriguezg.springbootangular.services.mappers;
 import org.springframework.stereotype.Component;
 
 import com.github.erodriguezg.springbootangular.services.dto.ComunaDto;
-import com.github.erodriguezg.springbootangular.services.entities.Comuna;
+import com.github.erodriguezg.springbootangular.entities.Comuna;
 
 @Component
 public class ComunaDtoMapper {

@@ -3,7 +3,7 @@ package com.github.erodriguezg.springbootangular.services.mappers;
 import org.springframework.stereotype.Component;
 
 import com.github.erodriguezg.springbootangular.services.dto.RegionDto;
-import com.github.erodriguezg.springbootangular.services.entities.Region;
+import com.github.erodriguezg.springbootangular.entities.Region;
 
 @Component
 public class RegionDtoMapper {

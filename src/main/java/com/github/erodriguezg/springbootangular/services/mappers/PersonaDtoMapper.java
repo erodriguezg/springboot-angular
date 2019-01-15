@@ -2,7 +2,7 @@ package com.github.erodriguezg.springbootangular.services.mappers;
 
 import com.github.erodriguezg.springbootangular.services.dto.PersonaDto;
 import com.github.erodriguezg.springbootangular.services.dto.UsuarioDto;
-import com.github.erodriguezg.springbootangular.services.entities.Persona;
+import com.github.erodriguezg.springbootangular.entities.Persona;
 import org.springframework.stereotype.Component;
 
 @Component

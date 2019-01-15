@@ -1,4 +1,4 @@
-package com.github.erodriguezg.springbootangular.services.entities;
+package com.github.erodriguezg.springbootangular.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -6,31 +6,25 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "provincia")
+@Table(name = "region")
 @NamedQueries({
-	@NamedQuery(name = "Provincia.traerPorRegion", query = "select p from Provincia p where p.region = :region order by p.nombre asc ")
+	@NamedQuery(name = "Region.traerTodas", query = "select r from Region r order by r.nombre asc ")
 })
-public class Provincia implements Serializable {
+public class Region implements Serializable {
 
-	private static final long serialVersionUID = -4339008590656387006L;
+	private static final long serialVersionUID = -4189202485773018556L;
 
 	@Id
-	@Column(name = "id_provincia")
+	@Column(name = "id_region")
 	private Integer id;
 
 	@Column(name = "nombre")
 	private String nombre;
-
-	@ManyToOne
-	@JoinColumn(name = "id_region")
-	private Region region;
 
 	public Integer getId() {
 		return id;
@@ -48,27 +42,18 @@ public class Provincia implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Region getRegion() {
-		return region;
-	}
-
-	public void setRegion(Region region) {
-		this.region = region;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		Provincia provincia = (Provincia) o;
-		return Objects.equals(id, provincia.id);
+		Region region = (Region) o;
+		return Objects.equals(id, region.id);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	
 }

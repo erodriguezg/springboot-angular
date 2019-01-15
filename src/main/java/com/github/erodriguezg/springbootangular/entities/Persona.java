@@ -1,4 +1,4 @@
-package com.github.erodriguezg.springbootangular.services.entities;
+package com.github.erodriguezg.springbootangular.entities;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
