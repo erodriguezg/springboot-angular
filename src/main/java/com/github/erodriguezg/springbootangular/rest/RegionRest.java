@@ -1,7 +1,7 @@
-package com.github.erodriguezg.springbootangular.rest.impl;
+package com.github.erodriguezg.springbootangular.rest;
 
+import com.github.erodriguezg.springbootangular.entities.Region;
 import com.github.erodriguezg.springbootangular.services.RegionService;
-import com.github.erodriguezg.springbootangular.services.dto.RegionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class RegionRest {
 
     @GetMapping("/todas")
     @PreAuthorize("isAuthenticated()")
-    public List<RegionDto> traerTodas() {
+    public List<Region> traerTodas() {
         return regionService.traerTodas();
     }
 

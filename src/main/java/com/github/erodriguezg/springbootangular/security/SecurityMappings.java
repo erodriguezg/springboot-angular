@@ -13,7 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.github.erodriguezg.springbootangular.services.dto.UsuarioDto;
+import com.github.erodriguezg.springbootangular.dto.UsuarioDto;
 
 public class SecurityMappings {
 
@@ -50,7 +50,7 @@ public class SecurityMappings {
 
 	private Authentication usuarioToAuth(UsuarioDto usuarioDto) {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(usuarioDto.getPerfil().getNombre()));
+		//authorities.add(new SimpleGrantedAuthority(usuarioDto.getPerfil().getNombre()));
 		return new UsernamePasswordAuthenticationToken(usuarioDto, null, authorities);
 	}
 

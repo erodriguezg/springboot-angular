@@ -1,6 +1,6 @@
 package com.github.erodriguezg.springbootangular.rest.interceptor;
 
-import com.github.erodriguezg.springbootangular.rest.dto.ErrorResponseDto;
+import com.github.erodriguezg.springbootangular.dto.ErrorResponseDto;
 import com.github.erodriguezg.springbootangular.services.exceptions.LogicaNegocioException;
 import com.github.erodriguezg.springbootangular.utils.ConstantesUtil;
 import org.slf4j.Logger;

@@ -26,6 +26,13 @@ public class Region implements Serializable {
 	@Column(name = "nombre")
 	private String nombre;
 
+	public Region() {
+	}
+
+	public Region(Integer id) {
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return id;
 	}

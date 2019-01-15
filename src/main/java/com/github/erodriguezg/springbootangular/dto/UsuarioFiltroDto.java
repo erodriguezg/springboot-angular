@@ -1,6 +1,7 @@
-package com.github.erodriguezg.springbootangular.services.dto;
+package com.github.erodriguezg.springbootangular.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.erodriguezg.springbootangular.entities.PerfilUsuario;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class UsuarioFiltroDto implements Serializable {
 	private Boolean habilitado;
 	
 	@JsonProperty(value = "perfil")
-	private PerfilDto perfilDto;
+	private PerfilUsuario perfil;
 
 	public String getUsername() {
 		return username;
@@ -70,12 +71,12 @@ public class UsuarioFiltroDto implements Serializable {
 		this.habilitado = habilitado;
 	}
 
-	public PerfilDto getPerfilDto() {
-		return perfilDto;
+	public PerfilUsuario getPerfil() {
+		return perfil;
 	}
 
-	public void setPerfilDto(PerfilDto perfilDto) {
-		this.perfilDto = perfilDto;
+	public void setPerfil(PerfilUsuario perfil) {
+		this.perfil = perfil;
 	}
 
 	public String getApPaterno() {

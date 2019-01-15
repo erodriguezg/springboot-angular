@@ -1,7 +1,7 @@
-package com.github.erodriguezg.springbootangular.rest.impl;
+package com.github.erodriguezg.springbootangular.rest;
 
+import com.github.erodriguezg.springbootangular.entities.PerfilUsuario;
 import com.github.erodriguezg.springbootangular.services.PerfilUsuarioService;
-import com.github.erodriguezg.springbootangular.services.dto.PerfilDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class PerfilRest {
 
     @GetMapping("/todos")
     @PreAuthorize("isAuthenticated()")
-    public List<PerfilDto> traerTodos() {
+    public List<PerfilUsuario> traerTodos() {
         return this.perfilService.traerTodos();
     }
 

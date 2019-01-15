@@ -1,5 +1,7 @@
 package com.github.erodriguezg.springbootangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -19,7 +21,8 @@ public class Comuna implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_provincia")
     private Provincia provincia;
 

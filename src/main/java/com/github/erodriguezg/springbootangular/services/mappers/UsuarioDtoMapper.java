@@ -1,15 +1,12 @@
 package com.github.erodriguezg.springbootangular.services.mappers;
 
-import com.github.erodriguezg.springbootangular.services.dto.UsuarioDto;
+import com.github.erodriguezg.springbootangular.dto.UsuarioDto;
 import com.github.erodriguezg.springbootangular.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UsuarioDtoMapper {
-
-    @Autowired
-    private PerfilDtoMapper perfilDtoMapper;
 
     @Autowired
     private PersonaDtoMapper personaDtoMapper;
@@ -23,7 +20,6 @@ public class UsuarioDtoMapper {
         dto.setHabilitado(entidad.getHabilitado());
         dto.setId(entidad.getIdPersona());
         dto.setPassword(entidad.getPassword());
-        dto.setPerfil(perfilDtoMapper.toPerfilDto(entidad.getPerfil()));
         dto.setUsername(entidad.getUsername());
         return dto;
     }
@@ -38,7 +34,6 @@ public class UsuarioDtoMapper {
         entidad.setIdPersona(dto.getId());
         entidad.setPassword(dto.getPassword());
         entidad.setPersona(personaDtoMapper.toEntidad(dto, dto.getPersona()));
-        entidad.setPerfil(perfilDtoMapper.toPerfilUsuario(dto.getPerfil()));
         return entidad;
     }
 }

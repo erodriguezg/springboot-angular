@@ -1,4 +1,4 @@
-package com.github.erodriguezg.springbootangular.rest.dto;
+package com.github.erodriguezg.springbootangular.dto;
 
 import java.io.Serializable;
 import java.util.Map;

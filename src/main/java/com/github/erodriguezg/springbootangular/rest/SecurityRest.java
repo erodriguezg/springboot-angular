@@ -1,13 +1,13 @@
-package com.github.erodriguezg.springbootangular.rest.impl;
+package com.github.erodriguezg.springbootangular.rest;
 
 import com.github.erodriguezg.javautils.CodecUtils;
 import com.github.erodriguezg.security.jwt.TokenService;
-import com.github.erodriguezg.springbootangular.rest.dto.CredencialesDto;
-import com.github.erodriguezg.springbootangular.rest.dto.RefreshTokenDto;
-import com.github.erodriguezg.springbootangular.rest.dto.RespuestaLoginDto;
+import com.github.erodriguezg.springbootangular.dto.CredencialesDto;
+import com.github.erodriguezg.springbootangular.dto.RefreshTokenDto;
+import com.github.erodriguezg.springbootangular.dto.RespuestaLoginDto;
 import com.github.erodriguezg.springbootangular.security.SecurityMappings;
 import com.github.erodriguezg.springbootangular.services.UsuarioService;
-import com.github.erodriguezg.springbootangular.services.dto.UsuarioDto;
+import com.github.erodriguezg.springbootangular.dto.UsuarioDto;
 import com.github.erodriguezg.springbootangular.utils.ConstantesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

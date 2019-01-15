@@ -1,9 +1,8 @@
 package com.github.erodriguezg.springbootangular.repository;
 
-import com.github.erodriguezg.springbootangular.entities.PerfilUsuario;
+import com.github.erodriguezg.springbootangular.dto.UsuarioFiltroDto;
 import com.github.erodriguezg.springbootangular.entities.Persona;
 import com.github.erodriguezg.springbootangular.entities.Usuario;
-import com.github.erodriguezg.springbootangular.services.dto.UsuarioFiltroDto;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -49,59 +48,58 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>, JpaSpec
     }
 
     default void addSpecApMaterno(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Path<Persona> persona) {
-        if(StringUtils.isNotBlank(filtroDto.getApMaterno())) {
+        if (StringUtils.isNotBlank(filtroDto.getApMaterno())) {
             predicates.add(cb.like(persona.get("apellidoMaterno"), "%" + filtroDto.getApMaterno() + "%"));
         }
     }
 
     default void addSpecApPaterno(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Path<Persona> persona) {
-        if(StringUtils.isNotBlank(filtroDto.getApPaterno())) {
+        if (StringUtils.isNotBlank(filtroDto.getApPaterno())) {
             predicates.add(cb.like(persona.get("apellidoPaterno"), "%" + filtroDto.getApPaterno() + "%"));
         }
     }
 
     default void addSpecEmail(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Path<Persona> persona) {
-        if(StringUtils.isNotBlank(filtroDto.getEmail())) {
+        if (StringUtils.isNotBlank(filtroDto.getEmail())) {
             predicates.add(cb.like(persona.get("email"), "%" + filtroDto.getEmail() + "%"));
         }
     }
 
     default void addSpecFechaNacimiento(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Path<Persona> persona) {
-        if(filtroDto.getFechaNacimientoInferior() != null) {
+        if (filtroDto.getFechaNacimientoInferior() != null) {
             predicates.add(cb.greaterThanOrEqualTo(persona.get("fechaNacimiento"), filtroDto.getFechaNacimientoInferior()));
         }
-        if(filtroDto.getFechaNacimientoSuperior() != null) {
+        if (filtroDto.getFechaNacimientoSuperior() != null) {
             predicates.add(cb.greaterThanOrEqualTo(persona.get("fechaNacimiento"), filtroDto.getFechaNacimientoSuperior()));
         }
     }
 
     default void addSpecHabilitado(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Root<Usuario> user) {
-        if(filtroDto.getHabilitado() != null) {
+        if (filtroDto.getHabilitado() != null) {
             predicates.add(cb.equal(user.get("habilitado"), filtroDto.getHabilitado()));
         }
     }
 
     default void addSpecNombres(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Path<Persona> persona) {
-        if(StringUtils.isNotBlank(filtroDto.getNombres())) {
+        if (StringUtils.isNotBlank(filtroDto.getNombres())) {
             predicates.add(cb.like(persona.get("nombres"), "%" + filtroDto.getNombres() + "%"));
         }
     }
 
     default void addSpecPerfil(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Root<Usuario> user) {
-        if(filtroDto.getPerfilDto() != null && filtroDto.getPerfilDto().getId() != null) {
-            PerfilUsuario perfilUsuario = new PerfilUsuario(filtroDto.getPerfilDto().getId());
-            predicates.add(cb.equal(user.get("perfil"), perfilUsuario));
+        if (filtroDto.getPerfil() != null && filtroDto.getPerfil().getIdPerfilUsuario() != null) {
+            predicates.add(cb.equal(user.get("perfil"), filtroDto.getPerfil()));
         }
     }
 
     default void addSpecRun(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Path<Persona> persona) {
-        if(filtroDto.getRun() != null) {
+        if (filtroDto.getRun() != null) {
             predicates.add(cb.equal(persona.get("run"), filtroDto.getRun()));
         }
     }
 
     default void addSpecUsername(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Root<Usuario> user) {
-        if(StringUtils.isNotBlank(filtroDto.getUsername())) {
+        if (StringUtils.isNotBlank(filtroDto.getUsername())) {
             predicates.add(cb.like(user.get("username"), "%" + filtroDto.getNombres() + "%"));
         }
     }

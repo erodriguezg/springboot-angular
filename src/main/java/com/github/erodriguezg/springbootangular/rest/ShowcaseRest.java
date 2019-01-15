@@ -1,4 +1,4 @@
-package com.github.erodriguezg.springbootangular.rest.impl;
+package com.github.erodriguezg.springbootangular.rest;
 
 import com.github.erodriguezg.springbootangular.services.exceptions.LogicaNegocioException;
 import org.slf4j.Logger;

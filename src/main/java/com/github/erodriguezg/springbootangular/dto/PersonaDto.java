@@ -1,4 +1,4 @@
-package com.github.erodriguezg.springbootangular.services.dto;
+package com.github.erodriguezg.springbootangular.dto;
 
 import com.github.erodriguezg.beanvalidationutils.annotations.Email;
 

@@ -61,7 +61,7 @@ public class Persona implements Serializable {
 	@Column(name = "apellido_materno")
 	private String apellidoMaterno;
 
-	@Column(name = "fechaNacimiento")
+	@Column(name = "fechanacimiento")
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 

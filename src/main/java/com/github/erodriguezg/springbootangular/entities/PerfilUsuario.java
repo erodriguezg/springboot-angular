@@ -1,5 +1,7 @@
 package com.github.erodriguezg.springbootangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -18,7 +20,8 @@ public class PerfilUsuario implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-    @OneToMany(mappedBy = "perfil")
+    @JsonIgnore
+    @OneToMany(mappedBy = "perfil", fetch = FetchType.LAZY)
     private Set<Usuario> usuarioSet;
 
     public PerfilUsuario() {

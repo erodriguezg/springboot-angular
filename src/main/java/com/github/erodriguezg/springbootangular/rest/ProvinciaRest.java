@@ -1,8 +1,8 @@
-package com.github.erodriguezg.springbootangular.rest.impl;
+package com.github.erodriguezg.springbootangular.rest;
 
+import com.github.erodriguezg.springbootangular.entities.Provincia;
+import com.github.erodriguezg.springbootangular.entities.Region;
 import com.github.erodriguezg.springbootangular.services.ProvinciaService;
-import com.github.erodriguezg.springbootangular.services.dto.ProvinciaDto;
-import com.github.erodriguezg.springbootangular.services.dto.RegionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +21,8 @@ public class ProvinciaRest {
 
     @GetMapping("/region/{idRegion}")
     @PreAuthorize("isAuthenticated()")
-    public List<ProvinciaDto> traerPorIdRegion(@PathVariable("idRegion") Integer idRegion) {
-        return provinciaService.traerPorRegion(new RegionDto(idRegion));
+    public List<Provincia> traerPorIdRegion(@PathVariable("idRegion") Integer idRegion) {
+        return provinciaService.traerPorRegion(new Region(idRegion));
     }
 
 }

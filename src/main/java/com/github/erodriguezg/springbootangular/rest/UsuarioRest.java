@@ -1,8 +1,8 @@
-package com.github.erodriguezg.springbootangular.rest.impl;
+package com.github.erodriguezg.springbootangular.rest;
 
 import com.github.erodriguezg.springbootangular.services.UsuarioService;
-import com.github.erodriguezg.springbootangular.services.dto.UsuarioDto;
-import com.github.erodriguezg.springbootangular.services.dto.UsuarioFiltroDto;
+import com.github.erodriguezg.springbootangular.dto.UsuarioDto;
+import com.github.erodriguezg.springbootangular.dto.UsuarioFiltroDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

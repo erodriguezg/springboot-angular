@@ -1,8 +1,8 @@
-package com.github.erodriguezg.springbootangular.rest.impl;
+package com.github.erodriguezg.springbootangular.rest;
 
+import com.github.erodriguezg.springbootangular.entities.Comuna;
+import com.github.erodriguezg.springbootangular.entities.Provincia;
 import com.github.erodriguezg.springbootangular.services.ComunaService;
-import com.github.erodriguezg.springbootangular.services.dto.ComunaDto;
-import com.github.erodriguezg.springbootangular.services.dto.ProvinciaDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +25,16 @@ public class ComunaRest {
 
     @GetMapping("/id/{idComuna}")
     @PreAuthorize("isAuthenticated()")
-    public ComunaDto traerComunaPorIdComuna(@PathVariable("idComuna") Integer idComuna) {
+    public Comuna traerComunaPorIdComuna(@PathVariable("idComuna") Integer idComuna) {
         log.debug("traer comuna por id: {}", idComuna);
-        return this.comunaService.traerPorId(idComuna);
+        return comunaService.traerPorId(idComuna);
     }
 
     @GetMapping("/provincia/{idProvincia}")
     @PreAuthorize("isAuthenticated()")
-    public List<ComunaDto> traerComunasPorProvincia(@PathVariable("idProvincia") int idProvincia) {
+    public List<Comuna> traerComunasPorProvincia(@PathVariable("idProvincia") int idProvincia) {
         log.debug("traer comunas por provincia id: {}", idProvincia);
-        return this.comunaService.traerPorProvincia(new ProvinciaDto(idProvincia));
+        return this.comunaService.traerPorProvincia(new Provincia(idProvincia));
     }
 
 }

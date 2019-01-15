@@ -1,5 +1,7 @@
 package com.github.erodriguezg.springbootangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,9 +19,16 @@ public class Provincia implements Serializable {
 	@Column(name = "nombre")
 	private String nombre;
 
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_region")
 	private Region region;
+
+	public Provincia() { }
+
+	public Provincia(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getId() {
 		return id;

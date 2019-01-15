@@ -1,4 +1,4 @@
-package com.github.erodriguezg.springbootangular.services.dto;
+package com.github.erodriguezg.springbootangular.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -24,7 +24,7 @@ public class UsuarioDto implements Serializable {
     private Boolean habilitado;
 
     @NotNull
-    private PerfilDto perfil;
+    //private PerfilDto perfil;
 
     @SuppressWarnings("squid:S2637")
     public UsuarioDto() {
@@ -71,6 +71,7 @@ public class UsuarioDto implements Serializable {
         this.habilitado = habilitado;
     }
 
+    /*
     public PerfilDto getPerfil() {
         return perfil;
     }
@@ -78,6 +79,7 @@ public class UsuarioDto implements Serializable {
     public void setPerfil(PerfilDto perfil) {
         this.perfil = perfil;
     }
+*/
 
     @Override
     public boolean equals(Object o) {
