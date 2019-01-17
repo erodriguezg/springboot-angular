@@ -60,7 +60,7 @@ public class Persona implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_comuna")
     private Comuna comuna;
 

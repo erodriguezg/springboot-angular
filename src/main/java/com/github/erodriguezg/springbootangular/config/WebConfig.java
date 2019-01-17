@@ -1,6 +1,5 @@
 package com.github.erodriguezg.springbootangular.config;
 
-import com.github.erodriguezg.javautils.CodecUtils;
 import com.github.erodriguezg.javautils.DateUtils;
 import com.github.erodriguezg.springbootangular.security.CorsFilter;
 import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
@@ -72,20 +71,6 @@ public class WebConfig implements WebMvcConfigurer {
         registration.setName("corsFilter");
         registration.setOrder(1);
         return registration;
-    }
-
-    /*
-    Utilitarios
-     */
-
-    @Bean
-    public CodecUtils codecUtils() {
-        return new CodecUtils();
-    }
-
-    @Bean
-    public DateUtils dateUtils() {
-        return new DateUtils();
     }
 
 }

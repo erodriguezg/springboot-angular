@@ -1,6 +1,5 @@
 package com.github.erodriguezg.springbootangular.services;
 
-import com.github.erodriguezg.javautils.CodecUtils;
 import com.github.erodriguezg.springbootangular.dto.UsuarioFiltroDto;
 import com.github.erodriguezg.springbootangular.entities.Persona;
 import com.github.erodriguezg.springbootangular.entities.Usuario;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +34,7 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private CodecUtils codecUtils;
+    private PasswordEncoder passwordEncoder;
 
     public List<Usuario> traerTodos() {
         return usuarioRepository.findAll(Sort.by(Sort.Direction.ASC, "usuario"));
@@ -63,7 +63,7 @@ public class UsuarioService {
         }
 
         if (usuarioAux == null || !usuarioAux.getPassword().equals(usuarioParam.getPassword())) {
-            usuarioParam.setPassword(codecUtils.generarHash(CodecUtils.TypeHash.MD5, usuarioParam.getPassword()));
+            usuarioParam.setPassword(passwordEncoder.encode(usuarioParam.getPassword()));
         }
         Usuario usuario = usuarioParam;
         Persona persona = em.merge(usuario.getPersona());

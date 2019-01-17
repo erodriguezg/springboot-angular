@@ -1,8 +1,11 @@
 package com.github.erodriguezg.springbootangular.rest;
 
+import com.github.erodriguezg.springbootangular.dto.GuardarUsuarioDto;
 import com.github.erodriguezg.springbootangular.dto.UsuarioFiltroDto;
 import com.github.erodriguezg.springbootangular.entities.Usuario;
+import com.github.erodriguezg.springbootangular.security.Identidad;
 import com.github.erodriguezg.springbootangular.services.UsuarioService;
+import com.github.erodriguezg.springbootangular.utils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ public class UsuarioRest {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private PropertyUtils propertyUtils;
 
     @GetMapping("/id/{idUsuario}")
     public Usuario traerPorId(@PathVariable("idUsuario") Long idUsuario) {
@@ -70,22 +76,27 @@ public class UsuarioRest {
     }
 
     @PostMapping("/guardar")
-    public void guardar(@RequestBody @Valid Usuario usuario, BindingResult bindResult, @AuthenticationPrincipal Usuario principal) {
-        log.debug("-> principal: {}", principal);
+    public void guardar(@RequestBody @Valid GuardarUsuarioDto guardarUsuarioDto, BindingResult bindResult, @AuthenticationPrincipal Identidad identidad) {
+        log.debug("-> principal: {}", identidad);
         if (bindResult.hasErrors()) {
             log.warn("Error de entrada: {}", bindResult.getAllErrors());
             throw new IllegalArgumentException(bindResult.getAllErrors().toString());
         }
+
+        //mapping para evitar vulnerabilidad de llenado entidad por post
+        Usuario usuario = new Usuario();
+        propertyUtils.copyProperties(usuario, guardarUsuarioDto);
+
         log.debug("Guardar usuario, entrada: {}", usuario);
         usuarioService.guardarUsuario(usuario);
     }
 
     @PostMapping("/eliminar")
-    public void eliminar(@RequestParam("idUsuario") Long idUsuario, @AuthenticationPrincipal Usuario principal) {
-        log.debug("-> principal: {}", principal);
+    public void eliminar(@RequestParam("idUsuario") Long idUsuario, @AuthenticationPrincipal Identidad identidad) {
+        log.debug("-> principal: {}", identidad);
         Usuario usuario = new Usuario();
         usuario.setIdPersona(idUsuario);
-        usuarioService.eliminar(usuario, principal.getIdPersona());
+        usuarioService.eliminar(usuario, identidad.getIdPersona());
     }
 
     @PostMapping("/cambiar-pass")

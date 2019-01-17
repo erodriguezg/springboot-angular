@@ -10,12 +10,14 @@ INSERT INTO "persona" ("id_persona", "id_comuna", "run", "nombres", "apellido_pa
 
 ALTER SEQUENCE persona_id_persona_seq RESTART WITH 10;
 
-INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (1, 1, 'admin', '70be2932a9786b17a1351b8d3b9fdf22', true);
-INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (2, 2, 'user1', '70be2932a9786b17a1351b8d3b9fdf22', true);
-INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (3, 2, 'user2', '70be2932a9786b17a1351b8d3b9fdf22', true);
-INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (4, 2, 'user3', '70be2932a9786b17a1351b8d3b9fdf22', true);
-INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (5, 2, 'user4', '70be2932a9786b17a1351b8d3b9fdf22', true);
-INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (6, 2, 'user5', '70be2932a9786b17a1351b8d3b9fdf22', true);
-INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (7, 2, 'user6', '70be2932a9786b17a1351b8d3b9fdf22', true);
-INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (8, 2, 'user7', '70be2932a9786b17a1351b8d3b9fdf22', true);
-INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (9, 2, 'user8', '70be2932a9786b17a1351b8d3b9fdf22', true);
+-- password cambiame
+
+INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (1, 1, 'admin', '$2a$10$uuNRHa/RQGApTtTl8qb3SujtGb/ZULO0THxkriszIb0Jt..C6VS6W', true);
+INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (2, 2, 'user1', '$2a$10$uuNRHa/RQGApTtTl8qb3SujtGb/ZULO0THxkriszIb0Jt..C6VS6W', true);
+INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (3, 2, 'user2', '$2a$10$uuNRHa/RQGApTtTl8qb3SujtGb/ZULO0THxkriszIb0Jt..C6VS6W', true);
+INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (4, 2, 'user3', '$2a$10$uuNRHa/RQGApTtTl8qb3SujtGb/ZULO0THxkriszIb0Jt..C6VS6W', true);
+INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (5, 2, 'user4', '$2a$10$uuNRHa/RQGApTtTl8qb3SujtGb/ZULO0THxkriszIb0Jt..C6VS6W', true);
+INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (6, 2, 'user5', '$2a$10$uuNRHa/RQGApTtTl8qb3SujtGb/ZULO0THxkriszIb0Jt..C6VS6W', true);
+INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (7, 2, 'user6', '$2a$10$uuNRHa/RQGApTtTl8qb3SujtGb/ZULO0THxkriszIb0Jt..C6VS6W', true);
+INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (8, 2, 'user7', '$2a$10$uuNRHa/RQGApTtTl8qb3SujtGb/ZULO0THxkriszIb0Jt..C6VS6W', true);
+INSERT INTO "usuario" ("id_persona", "id_perfil_usuario", "username", "password", "habilitado") VALUES (9, 2, 'user8', '$2a$10$uuNRHa/RQGApTtTl8qb3SujtGb/ZULO0THxkriszIb0Jt..C6VS6W', true);

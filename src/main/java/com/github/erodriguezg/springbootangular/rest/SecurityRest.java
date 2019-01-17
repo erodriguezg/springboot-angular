@@ -1,20 +1,19 @@
 package com.github.erodriguezg.springbootangular.rest;
 
-import com.github.erodriguezg.javautils.CodecUtils;
 import com.github.erodriguezg.security.jwt.TokenService;
 import com.github.erodriguezg.springbootangular.dto.CredencialesDto;
 import com.github.erodriguezg.springbootangular.dto.RefreshTokenDto;
 import com.github.erodriguezg.springbootangular.dto.RespuestaLoginDto;
 import com.github.erodriguezg.springbootangular.entities.Usuario;
-import com.github.erodriguezg.springbootangular.security.SecurityMappings;
+import com.github.erodriguezg.springbootangular.security.Identidad;
 import com.github.erodriguezg.springbootangular.services.UsuarioService;
 import com.github.erodriguezg.springbootangular.utils.ConstantesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,13 +36,10 @@ public class SecurityRest {
     private UsuarioService usuarioService;
 
     @Autowired
-    private CodecUtils codecUtils;
+    private TokenService<Identidad> tokenService;
 
     @Autowired
-    private TokenService tokenService;
-
-    @Autowired
-    private SecurityMappings securityMappings;
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
     @PreAuthorize("permitAll()")
@@ -75,7 +71,7 @@ public class SecurityRest {
 
         try {
             RespuestaLoginDto respuesta = new RespuestaLoginDto();
-            String tokenJwt = tokenService.create(securityMappings.userToTokenSubjectMap(usuarioEncontrado));
+            String tokenJwt = tokenService.create(new Identidad(usuarioEncontrado));
             respuesta.setToken(tokenJwt);
             respuesta.setExitoLogin(true);
             return respuesta;
@@ -91,10 +87,9 @@ public class SecurityRest {
 
     @PostMapping("/refreshToken")
     @PreAuthorize("isAuthenticated()")
-    public RefreshTokenDto refreshToken() {
+    public RefreshTokenDto refreshToken(@AuthenticationPrincipal Identidad identidad) {
         try {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            String token = this.tokenService.create(securityMappings.authToTokenSubjectMap(authentication));
+            String token = this.tokenService.create(identidad);
             RefreshTokenDto refreshTokenDto = new RefreshTokenDto();
             refreshTokenDto.setToken(token);
             return refreshTokenDto;
@@ -108,8 +103,7 @@ public class SecurityRest {
         if (usuario == null) {
             return Optional.of(ERROR_LOGIN);
         }
-        String passMD5 = codecUtils.generarHash(CodecUtils.TypeHash.MD5, credenciales.getPassword());
-        if (!passMD5.equals(usuario.getPassword())) {
+        if (!passwordEncoder.matches(credenciales.getPassword(), usuario.getPassword())) {
             return Optional.of(ERROR_LOGIN);
         }
         return Optional.empty();
