@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.Filter;
@@ -29,34 +30,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
+                .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
                 .csrf()
-                .disable()
+                    .disable()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/hello").permitAll()
-                .antMatchers("/hello-protected").authenticated()
-                .antMatchers("/test/**").permitAll()
-                .antMatchers("/favicon.ico").permitAll()
-                .antMatchers("/*.html", "**/*.html").permitAll()
-                .antMatchers("/*.js", "**/*.js").permitAll()
-                .antMatchers("/*.css", "**/*.css").permitAll()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/hello").permitAll()
+                    .antMatchers("/hello-protected").authenticated()
+                    .antMatchers("/test/**").permitAll()
+                    .antMatchers("/favicon.ico").permitAll()
 
-                // Protected refresh jwt token
-                .antMatchers("/security/refresh").authenticated()
+                    // Protected refresh jwt token
+                    .antMatchers("/security/refresh").authenticated()
 
-                // Allow anonymous logins
-                .antMatchers("/security/**").permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
-                .anyRequest().permitAll()
-                .and()
+                    // Allow anonymous logins
+                    .antMatchers("/security/**").permitAll()
+                    .antMatchers(HttpMethod.OPTIONS, "**").permitAll()
+                    .anyRequest().permitAll()
+                    .and()
                 .exceptionHandling()
-                .and()
+                    .and()
                 .anonymous()
-                .and()
+                    .and()
                 .servletApi()
-                .and()
-                .headers().cacheControl().disable()
-                .and()
+                    .and()
+                .headers()
+                    .cacheControl().disable()
+                    .and()
                 .addFilterAt(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
