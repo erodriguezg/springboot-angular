@@ -3,7 +3,7 @@ package com.github.erodriguezg.springbootangular.repository;
 import com.github.erodriguezg.springbootangular.dto.UsuarioFiltroDto;
 import com.github.erodriguezg.springbootangular.entities.Persona;
 import com.github.erodriguezg.springbootangular.entities.Usuario;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

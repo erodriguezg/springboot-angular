@@ -1,6 +1,5 @@
 package com.github.erodriguezg.springbootangular.config;
 
-import com.github.erodriguezg.javautils.DateUtils;
 import com.github.erodriguezg.springbootangular.security.CorsFilter;
 import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
