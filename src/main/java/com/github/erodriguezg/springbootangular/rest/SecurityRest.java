@@ -5,9 +5,9 @@ import com.github.erodriguezg.security.jwt.TokenService;
 import com.github.erodriguezg.springbootangular.dto.CredencialesDto;
 import com.github.erodriguezg.springbootangular.dto.RefreshTokenDto;
 import com.github.erodriguezg.springbootangular.dto.RespuestaLoginDto;
+import com.github.erodriguezg.springbootangular.entities.Usuario;
 import com.github.erodriguezg.springbootangular.security.SecurityMappings;
 import com.github.erodriguezg.springbootangular.services.UsuarioService;
-import com.github.erodriguezg.springbootangular.dto.UsuarioDto;
 import com.github.erodriguezg.springbootangular.utils.ConstantesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 @RestController
@@ -52,14 +52,14 @@ public class SecurityRest {
         if (bindResult.hasErrors()) {
             RespuestaLoginDto respParamInvalidos = new RespuestaLoginDto();
             respParamInvalidos.setExitoLogin(false);
-            respParamInvalidos.setErrores(Arrays.asList(ConstantesUtil.MSJ_PARAMETROS_INVALIDOS));
+            respParamInvalidos.setErrores(Collections.singletonList(ConstantesUtil.MSJ_PARAMETROS_INVALIDOS));
             return respParamInvalidos;
         }
 
-        UsuarioDto usuarioEncontrado = this.usuarioService.traerPorUsername(credenciales.getUsername());
+        Usuario usuarioEncontrado = this.usuarioService.traerPorUsername(credenciales.getUsername());
         if (usuarioEncontrado == null) {
             RespuestaLoginDto errorNoEncontroUsuario = new RespuestaLoginDto();
-            errorNoEncontroUsuario.setErrores(Arrays.asList("credenciales incorrectas"));
+            errorNoEncontroUsuario.setErrores(Collections.singletonList("credenciales incorrectas"));
             errorNoEncontroUsuario.setExitoLogin(false);
             return errorNoEncontroUsuario;
         }
@@ -69,7 +69,7 @@ public class SecurityRest {
         if (errorCredenciales.isPresent()) {
             RespuestaLoginDto respuestaErrorCredenciales = new RespuestaLoginDto();
             respuestaErrorCredenciales.setExitoLogin(false);
-            respuestaErrorCredenciales.setErrores(Arrays.asList(errorCredenciales.get()));
+            respuestaErrorCredenciales.setErrores(Collections.singletonList(errorCredenciales.get()));
             return respuestaErrorCredenciales;
         }
 
@@ -83,7 +83,7 @@ public class SecurityRest {
             log.error("Ocurrio un error al identificar usuario: {}", credenciales.getUsername(), ex);
             RespuestaLoginDto respuestaErrorInterno = new RespuestaLoginDto();
             respuestaErrorInterno.setExitoLogin(false);
-            respuestaErrorInterno.setErrores(Arrays.asList(ConstantesUtil.MSJ_ERROR_INTERNO));
+            respuestaErrorInterno.setErrores(Collections.singletonList(ConstantesUtil.MSJ_ERROR_INTERNO));
             return respuestaErrorInterno;
         }
 
@@ -104,12 +104,12 @@ public class SecurityRest {
         }
     }
 
-    private Optional<String> validarCredenciales(CredencialesDto credenciales, UsuarioDto usuarioDto) {
-        if (usuarioDto == null) {
+    private Optional<String> validarCredenciales(CredencialesDto credenciales, Usuario usuario) {
+        if (usuario == null) {
             return Optional.of(ERROR_LOGIN);
         }
         String passMD5 = codecUtils.generarHash(CodecUtils.TypeHash.MD5, credenciales.getPassword());
-        if (!passMD5.equals(usuarioDto.getPassword())) {
+        if (!passMD5.equals(usuario.getPassword())) {
             return Optional.of(ERROR_LOGIN);
         }
         return Optional.empty();

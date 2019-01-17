@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.erodriguezg.springbootangular.entities.Usuario;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,15 +14,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.github.erodriguezg.springbootangular.dto.UsuarioDto;
 
 public class SecurityMappings {
 
-	public Map<String, String> userToTokenSubjectMap(UsuarioDto usuarioDto) {
+	public Map<String, String> userToTokenSubjectMap(Usuario usuario) {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, String> sessionMap = new HashMap<>();
 		try {
-			sessionMap.put("usuario", mapper.writeValueAsString(usuarioDto));
+			sessionMap.put("usuario", mapper.writeValueAsString(usuario));
 		} catch (JsonProcessingException ex) {
 			throw new IllegalStateException(ex);
 		}
@@ -29,7 +29,7 @@ public class SecurityMappings {
 	}
 
 	public Map<String, String> authToTokenSubjectMap(Authentication authentication) {
-		UsuarioDto usuario = (UsuarioDto) authentication.getPrincipal();
+		Usuario usuario = (Usuario) authentication.getPrincipal();
 		if (usuario == null) {
 			return null;
 		}
@@ -39,19 +39,19 @@ public class SecurityMappings {
 	public Authentication tokenSubjectMapToAuth(Map<String, String> subjectMap) {
 		ObjectMapper mapper = new ObjectMapper();
 		String usuarioJson = subjectMap.get("usuario");
-		UsuarioDto usuarioDto;
+		Usuario usuario;
 		try {
-			usuarioDto = mapper.readValue(usuarioJson, UsuarioDto.class);
+			usuario = mapper.readValue(usuarioJson, Usuario.class);
 		} catch (IOException ex) {
 			throw new IllegalStateException(ex);
 		}
-		return usuarioToAuth(usuarioDto);
+		return usuarioToAuth(usuario);
 	}
 
-	private Authentication usuarioToAuth(UsuarioDto usuarioDto) {
+	private Authentication usuarioToAuth(Usuario usuario) {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		//authorities.add(new SimpleGrantedAuthority(usuarioDto.getPerfil().getNombre()));
-		return new UsernamePasswordAuthenticationToken(usuarioDto, null, authorities);
+		authorities.add(new SimpleGrantedAuthority(usuario.getPerfil().getNombre()));
+		return new UsernamePasswordAuthenticationToken(usuario, null, authorities);
 	}
 
 }

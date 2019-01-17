@@ -1,8 +1,8 @@
 package com.github.erodriguezg.springbootangular.rest;
 
-import com.github.erodriguezg.springbootangular.services.UsuarioService;
-import com.github.erodriguezg.springbootangular.dto.UsuarioDto;
 import com.github.erodriguezg.springbootangular.dto.UsuarioFiltroDto;
+import com.github.erodriguezg.springbootangular.entities.Usuario;
+import com.github.erodriguezg.springbootangular.services.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,22 +25,22 @@ public class UsuarioRest {
     private UsuarioService usuarioService;
 
     @GetMapping("/id/{idUsuario}")
-    public UsuarioDto traerPorId(@PathVariable("idUsuario") Long idUsuario) {
+    public Usuario traerPorId(@PathVariable("idUsuario") Long idUsuario) {
         return usuarioService.traerPorId(idUsuario);
     }
 
     @GetMapping("/username/{username}")
-    public UsuarioDto traerPorUsername(@PathVariable("username") String username) {
+    public Usuario traerPorUsername(@PathVariable("username") String username) {
         return usuarioService.traerPorUsername(username);
     }
 
     @PostMapping("/email")
-    public UsuarioDto taerPorEmail(@RequestParam("email") String email) {
+    public Usuario taerPorEmail(@RequestParam("email") String email) {
         return usuarioService.traerPorEmail(email);
     }
 
     @GetMapping("/run/{run}")
-    public UsuarioDto traerPorRun(@PathVariable("run") Integer run) {
+    public Usuario traerPorRun(@PathVariable("run") Integer run) {
         return usuarioService.traerPorRun(run);
     }
 
@@ -53,7 +53,7 @@ public class UsuarioRest {
     }
 
     @PostMapping("/buscar")
-    public List<UsuarioDto> buscar(
+    public List<Usuario> buscar(
             @RequestBody UsuarioFiltroDto filtros,
             @RequestParam("inicio") int inicio,
             @RequestParam("fin") int fin) {
@@ -64,35 +64,35 @@ public class UsuarioRest {
     }
 
     @PostMapping("/buscar-no-paginado")
-    public List<UsuarioDto> buscar(@RequestBody UsuarioFiltroDto filtros) {
+    public List<Usuario> buscar(@RequestBody UsuarioFiltroDto filtros) {
         log.debug("-> buscando usuarios por filtros: {}", filtros);
         return usuarioService.buscar(filtros);
     }
 
     @PostMapping("/guardar")
-    public void guardar(@RequestBody @Valid UsuarioDto usuarioDto, BindingResult bindResult, @AuthenticationPrincipal UsuarioDto principal) {
+    public void guardar(@RequestBody @Valid Usuario usuario, BindingResult bindResult, @AuthenticationPrincipal Usuario principal) {
         log.debug("-> principal: {}", principal);
         if (bindResult.hasErrors()) {
             log.warn("Error de entrada: {}", bindResult.getAllErrors());
             throw new IllegalArgumentException(bindResult.getAllErrors().toString());
         }
-        log.debug("Guardar usuario, entrada: {}", usuarioDto);
-        usuarioService.guardarUsuario(usuarioDto);
+        log.debug("Guardar usuario, entrada: {}", usuario);
+        usuarioService.guardarUsuario(usuario);
     }
 
     @PostMapping("/eliminar")
-    public void eliminar(@RequestParam ("idUsuario") Long idUsuario, @AuthenticationPrincipal UsuarioDto principal) {
+    public void eliminar(@RequestParam("idUsuario") Long idUsuario, @AuthenticationPrincipal Usuario principal) {
         log.debug("-> principal: {}", principal);
-        UsuarioDto usuarioDto = new UsuarioDto();
-        usuarioDto.setId(idUsuario);
-        usuarioService.eliminar(usuarioDto, principal.getId());
+        Usuario usuario = new Usuario();
+        usuario.setIdPersona(idUsuario);
+        usuarioService.eliminar(usuario, principal.getIdPersona());
     }
 
     @PostMapping("/cambiar-pass")
     public void cambiarPass(@RequestParam("idUsuario") Long idUsuario, @RequestParam("newPass") String newPass) {
-        UsuarioDto usuarioDto = usuarioService.traerPorId(idUsuario);
-        usuarioDto.setPassword(newPass);
-        usuarioService.guardarUsuario(usuarioDto);
+        Usuario usuario = usuarioService.traerPorId(idUsuario);
+        usuario.setPassword(newPass);
+        usuarioService.guardarUsuario(usuario);
     }
 
 }

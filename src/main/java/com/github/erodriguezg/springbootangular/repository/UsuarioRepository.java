@@ -22,9 +22,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>, JpaSpec
 
     Usuario findByUsername(String username);
 
-    Usuario findByRun(Integer run);
+    Usuario findByPersonaRun(Integer run);
 
-    Usuario findByEmail(String email);
+    Usuario findByPersonaEmail(String email);
 
     // specifications
 

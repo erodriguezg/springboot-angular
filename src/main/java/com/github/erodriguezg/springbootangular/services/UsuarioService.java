@@ -1,19 +1,17 @@
 package com.github.erodriguezg.springbootangular.services;
 
 import com.github.erodriguezg.javautils.CodecUtils;
+import com.github.erodriguezg.springbootangular.dto.UsuarioFiltroDto;
 import com.github.erodriguezg.springbootangular.entities.Persona;
 import com.github.erodriguezg.springbootangular.entities.Usuario;
 import com.github.erodriguezg.springbootangular.repository.UsuarioRepository;
-import com.github.erodriguezg.springbootangular.dto.PersonaDto;
-import com.github.erodriguezg.springbootangular.dto.UsuarioDto;
-import com.github.erodriguezg.springbootangular.dto.UsuarioFiltroDto;
 import com.github.erodriguezg.springbootangular.services.exceptions.LogicaNegocioException;
-import com.github.erodriguezg.springbootangular.services.mappers.UsuarioDtoMapper;
 import com.github.erodriguezg.springbootangular.utils.ConstantesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +20,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -37,44 +34,38 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private UsuarioDtoMapper usuarioMapper;
-
-    @Autowired
     private CodecUtils codecUtils;
 
-    public List<UsuarioDto> traerTodos() {
-        return usuarioRepository.findAll(Sort.by(Sort.Direction.ASC, "usuario"))
-                .stream()
-                .map(this.usuarioMapper::toUsuarioDto).collect(Collectors.toList());
+    public List<Usuario> traerTodos() {
+        return usuarioRepository.findAll(Sort.by(Sort.Direction.ASC, "usuario"));
     }
 
-    public UsuarioDto traerPorEmail(final String email) {
-        Usuario usuario = usuarioRepository.findByEmail(email != null ? email.trim().toLowerCase() : null);
-        return usuarioMapper.toUsuarioDto(usuario);
+    public Usuario traerPorEmail(final String email) {
+        return usuarioRepository.findByPersonaEmail(email != null ? email.trim().toLowerCase() : null);
     }
 
     @Transactional(readOnly = false)
-    public UsuarioDto guardarUsuario(UsuarioDto usuarioDto) {
-        LOG.debug("Guardar Usuario: {}", usuarioDto);
+    public Usuario guardarUsuario(Usuario usuarioParam) {
+        LOG.debug("Guardar Usuario: {}", usuarioParam);
 
-        PersonaDto personaDto = usuarioDto.getPersona();
+        Persona personaParam = usuarioParam.getPersona();
 
-        Usuario usuarioAux = usuarioRepository.findByEmail(personaDto.getEmail());
-        if (usuarioAux != null && !usuarioAux.getIdPersona().equals(usuarioDto.getId())) {
+        Usuario usuarioAux = usuarioRepository.findByPersonaEmail(personaParam.getEmail());
+        if (usuarioAux != null && !usuarioAux.getIdPersona().equals(usuarioParam.getIdPersona())) {
             throw new LogicaNegocioException("Ya existe correo para el usuario");
         }
 
-        usuarioAux = usuarioRepository.findByRun(personaDto.getRun());
-        if (usuarioAux != null && !usuarioAux.getIdPersona().equals(usuarioDto.getId())) {
+        usuarioAux = usuarioRepository.findByPersonaRun(personaParam.getRun());
+        if (usuarioAux != null && !usuarioAux.getIdPersona().equals(usuarioParam.getIdPersona())) {
             throw new LogicaNegocioException("Ya existe run para el usuario");
         } else if (usuarioAux == null) {
-            usuarioDto.setHabilitado(true);
+            usuarioParam.setHabilitado(true);
         }
 
-        if (usuarioAux == null || !usuarioAux.getPassword().equals(usuarioDto.getPassword())) {
-            usuarioDto.setPassword(codecUtils.generarHash(CodecUtils.TypeHash.MD5, usuarioDto.getPassword()));
+        if (usuarioAux == null || !usuarioAux.getPassword().equals(usuarioParam.getPassword())) {
+            usuarioParam.setPassword(codecUtils.generarHash(CodecUtils.TypeHash.MD5, usuarioParam.getPassword()));
         }
-        Usuario usuario = usuarioMapper.toUsuario(usuarioDto);
+        Usuario usuario = usuarioParam;
         Persona persona = em.merge(usuario.getPersona());
         persona.setUsuario(usuario);
         usuario.setPersona(persona);
@@ -83,12 +74,11 @@ public class UsuarioService {
         } else {
             usuario = em.merge(usuario);
         }
-        return usuarioMapper.toUsuarioDto(usuario);
+        return usuario;
     }
 
-    public UsuarioDto traerPorUsername(final String username) {
-        Usuario usuario = usuarioRepository.findByUsername(username != null ? username.trim().toLowerCase() : null);
-        return usuarioMapper.toUsuarioDto(usuario);
+    public Usuario traerPorUsername(final String username) {
+        return usuarioRepository.findByUsername(username != null ? username.trim().toLowerCase() : null);
     }
 
     public long buscarRowCount(UsuarioFiltroDto filtroDto) {
@@ -96,25 +86,23 @@ public class UsuarioService {
         return usuarioRepository.count(userSpecification);
     }
 
-    public List<UsuarioDto> buscar(UsuarioFiltroDto filtroDto, int inicio, int fin) {
+    public List<Usuario> buscar(UsuarioFiltroDto filtroDto, int inicio, int fin) {
         Specification<Usuario> userSpecification = usuarioRepository.filtroToSpecification(filtroDto);
         return usuarioRepository.findAll(userSpecification, PageRequest.of(inicio, fin - inicio))
-                .stream()
-                .map(usuario -> usuarioMapper.toUsuarioDto(usuario))
-                .collect(Collectors.toList());
+                .getContent();
     }
 
-    public List<UsuarioDto> buscar(UsuarioFiltroDto usuarioFiltroDto) {
+    public List<Usuario> buscar(UsuarioFiltroDto usuarioFiltroDto) {
         return buscar(usuarioFiltroDto, 0, Integer.MAX_VALUE);
     }
 
     @Transactional(readOnly = false)
-    public void eliminar(UsuarioDto usuarioDto, Long idUsuarioActual) {
-        if (idUsuarioActual.equals(usuarioDto.getId())) {
+    public void eliminar(Usuario usuarioParam, Long idUsuarioActual) {
+        if (idUsuarioActual.equals(usuarioParam.getIdPersona())) {
             throw new LogicaNegocioException(ConstantesUtil.MSJ_ELIMINAR_A_SI_MISMO);
         }
-        Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuarioDto.getId());
-        if(optionalUsuario.isPresent()) {
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuarioParam.getIdPersona());
+        if (optionalUsuario.isPresent()) {
             Usuario usuario = optionalUsuario.get();
             Persona persona = usuario.getPersona();
             em.remove(usuario);
@@ -123,34 +111,32 @@ public class UsuarioService {
     }
 
     @Transactional(readOnly = false)
-    public void habilitar(UsuarioDto usuarioDto) {
-        Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuarioDto.getId());
-        if(optionalUsuario.isPresent()) {
+    public void habilitar(Usuario usuarioParam) {
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuarioParam.getIdPersona());
+        if (optionalUsuario.isPresent()) {
             Usuario usuario = optionalUsuario.get();
             usuario.setHabilitado(true);
         }
     }
 
     @Transactional(readOnly = false)
-    public void deshabilitar(UsuarioDto usuarioDto, Long idUsuarioActual) {
-        if (idUsuarioActual.equals(usuarioDto.getId())) {
+    public void deshabilitar(Usuario usuarioPAram, Long idUsuarioActual) {
+        if (idUsuarioActual.equals(usuarioPAram.getIdPersona())) {
             throw new LogicaNegocioException(ConstantesUtil.MSJ_DESHABILITAR_A_SI_MISMO);
         }
-        Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuarioDto.getId());
-        if(optionalUsuario.isPresent()) {
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuarioPAram.getIdPersona());
+        if (optionalUsuario.isPresent()) {
             Usuario usuario = optionalUsuario.get();
             usuario.setHabilitado(false);
         }
     }
 
-    public UsuarioDto traerPorRun(Integer run) {
-        Usuario usuario = usuarioRepository.findByRun(run);
-        return usuarioMapper.toUsuarioDto(usuario);
+    public Usuario traerPorRun(Integer run) {
+        return usuarioRepository.findByPersonaRun(run);
     }
 
-    public UsuarioDto traerPorId(Long idUsuario) {
-        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
-        return usuarioMapper.toUsuarioDto(usuario);
+    public Usuario traerPorId(Long idUsuario) {
+        return usuarioRepository.findById(idUsuario).orElse(null);
     }
 
 }
