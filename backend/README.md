@@ -12,3 +12,7 @@
 3) (Opcional) Agregar variable de entorno en el IDE: spring.profiles.active=PROD (o como parametro -D en comando IDE)
 5) Lanzar comando: "spring-boot:run -Duser.language=es -Duser.region=CL -Dfile.encoding=UTF-8"
 9) Backend queda en "localhost:8080"
+
+## Documentación RestApi Con Swagger
+
+Ubicada en la url: http://localhost:8080/swagger-ui.html

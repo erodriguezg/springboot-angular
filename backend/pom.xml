@@ -31,6 +31,7 @@
         <version.jjwt>0.10.5</version.jjwt>
         <version.flyway>5.2.4</version.flyway>
         <version.logstash-gelf>1.12.1</version.logstash-gelf>
+        <version.swagger-2>2.9.2</version.swagger-2>
 
         <version.apache-poi>4.0.1</version.apache-poi>
         <version.apache-tika>1.20</version.apache-tika>
@@ -215,6 +216,20 @@
             <groupId>biz.paluch.logging</groupId>
             <artifactId>logstash-gelf</artifactId>
             <version>${version.logstash-gelf}</version>
+        </dependency>
+
+        <!-- SWAGGER 2 -->
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${version.swagger-2}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${version.swagger-2}</version>
         </dependency>
 
         <!-- test -->
