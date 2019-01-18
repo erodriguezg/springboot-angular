@@ -53,13 +53,13 @@ export class UsuariosService {
 
     eliminar(usuarioDto: UsuarioDto, blockui: boolean = true): Observable<any> {
         const params = new URLSearchParams();
-        params.set('idUsuario', usuarioDto.id.toString());
+        params.set('idUsuario', usuarioDto.idPersona.toString());
         return this.httpService.postFormForJson<any>('/usuarios/eliminar', params, blockui);
     }
 
     cambiarPass(usuarioDto: UsuarioDto, newPass: string, blockui: boolean = true): Observable<any> {
         const params = new URLSearchParams();
-        params.set('idUsuario', usuarioDto.id.toString());
+        params.set('idUsuario', usuarioDto.idPersona.toString());
         params.set('newPass', newPass);
         return this.httpService.postFormForJson<any>('/usuarios/cambiar-pass', params, blockui);
     }

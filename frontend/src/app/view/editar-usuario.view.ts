@@ -16,8 +16,8 @@ import {PerfilesService} from '../service/perfiles.service';
 import {CustomsValidators} from '../validators/customs.validators';
 import {RutConverter} from '../converters/rut.converter';
 
-const moment = require('moment');
-const _ = require('lodash');
+import * as moment from 'moment';
+import * as _ from 'lodash';
 
 @Component({
     templateUrl: 'editar-usuario.view.html'
@@ -120,7 +120,7 @@ export class EditarUsuarioView implements OnInit {
         const extra: any = {validator: CustomsValidators.matchingPasswords('password', 'confirmPassword')};
 
         this.formUsuario = this.fb.group({
-            id: [dto.id],
+            id: [dto.idPersona],
             habilitado: [dto.habilitado],
             username: [dto.username,
                 Validators.compose([Validators.required, Validators.minLength(4),
@@ -131,9 +131,9 @@ export class EditarUsuarioView implements OnInit {
                 Validators.compose([Validators.required, CustomsValidators.validateRUN]), this.runUnicoValidator()],
             nombres: [dto.persona.nombres,
                 Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
-            apPaterno: [dto.persona.apPaterno,
+            apPaterno: [dto.persona.apellidoPaterno,
                 Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
-            apMaterno: [dto.persona.apMaterno,
+            apMaterno: [dto.persona.apellidoMaterno,
                 Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
             email: [dto.persona.email,
                 Validators.compose([Validators.required, CustomsValidators.validateEmail, Validators.maxLength(100)]),
@@ -176,15 +176,15 @@ export class EditarUsuarioView implements OnInit {
     private formToDto(): UsuarioDto {
         const usuarioDto: UsuarioDto = <UsuarioDto>{};
         usuarioDto.persona = <PersonaDto>{};
-        usuarioDto.id = this.formUsuario.get('id').value;
+        usuarioDto.idPersona = this.formUsuario.get('id').value;
         usuarioDto.username = this.formUsuario.get('username').value;
         usuarioDto.perfil = this.formUsuario.get('perfil').value;
         usuarioDto.habilitado = this.formUsuario.get('habilitado').value;
         usuarioDto.password = this.modoEditar ? this.usuarioEntrada.password : this.formUsuario.get('password').value;
         usuarioDto.persona.fechaNacimiento = this.formUsuario.get('fechaNacimiento').value;
         usuarioDto.persona.email = this.formUsuario.get('email').value;
-        usuarioDto.persona.apPaterno = this.formUsuario.get('apPaterno').value;
-        usuarioDto.persona.apMaterno = this.formUsuario.get('apMaterno').value;
+        usuarioDto.persona.apellidoPaterno = this.formUsuario.get('apPaterno').value;
+        usuarioDto.persona.apellidoMaterno = this.formUsuario.get('apMaterno').value;
         usuarioDto.persona.nombres = this.formUsuario.get('nombres').value;
         usuarioDto.persona.run = RutConverter.toNumber(this.formUsuario.get('run').value);
         return usuarioDto;
@@ -197,7 +197,7 @@ export class EditarUsuarioView implements OnInit {
                 this.usernameTimeOut = setTimeout(() => {
                     this.usuarioService.traerPorUsername(control.value, false)
                         .subscribe(user => {
-                            if (user && user.id !== this.usuarioEntrada.id) {
+                            if (user && user.idPersona !== this.usuarioEntrada.idPersona) {
                                 resolve({usernameUnico: true});
                             } else {
                                 resolve(null);
@@ -217,7 +217,7 @@ export class EditarUsuarioView implements OnInit {
                 this.emailTimeOut = setTimeout(() => {
                     this.usuarioService.traerPorEmail(control.value, false)
                         .subscribe(user => {
-                            if (user && user.id !== this.usuarioEntrada.id) {
+                            if (user && user.idPersona !== this.usuarioEntrada.idPersona) {
                                 resolve({emailUnico: true});
                             } else {
                                 resolve(null);
@@ -237,7 +237,7 @@ export class EditarUsuarioView implements OnInit {
                 this.runTimeOut = setTimeout(() => {
                     this.usuarioService.traerPorRun(RutConverter.toNumber(control.value), false)
                         .subscribe(user => {
-                            if (user && user.id !== this.usuarioEntrada.id) {
+                            if (user && user.idPersona !== this.usuarioEntrada.idPersona) {
                                 resolve({runUnico: true});
                             } else {
                                 resolve(null);

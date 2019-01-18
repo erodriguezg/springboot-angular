@@ -6,10 +6,10 @@ import {Sesion} from '../domain/sesion';
 import {RespuestaLoginDto} from '../dto/respuesta-login.dto';
 import {RefreshTokenDto} from '../dto/refresh-token.dto';
 import {Idle} from '@ng-idle/core';
-import {ENVIRONMENT} from 'environments/environment';
-import {CredencialesDto} from '../dto/credenciales.dto';
-import {UsuarioDto} from '../dto/usuario.dto';
-import {HttpService} from './http.service';
+import { ENVIRONMENT } from '../../environments/environment';
+import { CredencialesDto } from '../dto/credenciales.dto';
+import { HttpService } from './http.service';
+import { IdentidadDto } from '../dto/identidad.dto';
 
 @Injectable()
 export class AuthService {
@@ -26,11 +26,11 @@ export class AuthService {
 
     /* PUBLICOS */
 
-    public getToken(): string {
+    getToken(): string {
         return (this.sesion !== undefined && this.sesion != null) ? this.sesion.token : '';
     }
 
-    public login(username: string, password: string): Observable<RespuestaLoginDto> {
+    login(username: string, password: string): Observable<RespuestaLoginDto> {
         const credenciales: CredencialesDto = {
             username: username,
             password: password
@@ -45,7 +45,7 @@ export class AuthService {
             });
     }
 
-    public refrescarToken(): Observable<RefreshTokenDto> {
+    refrescarToken(): Observable<RefreshTokenDto> {
         if (!this.isLogged()) {
             return Observable.create(undefined);
         } else {
@@ -58,16 +58,16 @@ export class AuthService {
         }
     }
 
-    public logout() {
+    logout() {
         this.cleanSession();
         this.router.navigate(['/']);
     }
 
-    public logoutNoNavigate() {
+    logoutNoNavigate() {
         this.cleanSession();
     }
 
-    public isLogged(): boolean {
+    isLogged(): boolean {
         const logged: boolean = (this.sesion !== undefined && this.sesion !== null);
         if (logged && (this.refreshTokenTimer === undefined || this.refreshTokenTimer == null)) {
             this.setRefreshTokenTimer();
@@ -75,22 +75,22 @@ export class AuthService {
         return logged;
     }
 
-    public getUsuarioDto(): UsuarioDto {
+    getIdentidad(): IdentidadDto {
         if (!this.isLogged()) {
             return null;
         }
-        return <UsuarioDto>JSON.parse(this.sesion.data.usuario);
+        return this.sesion.data as IdentidadDto;
     }
 
-    public tienePerfil(idPerfil: number): boolean {
-        const usuario: UsuarioDto = this.getUsuarioDto();
-        if (!usuario || !usuario.perfil) {
+    tienePerfil(idPerfil: number): boolean {
+        const identidad: IdentidadDto = this.getIdentidad();
+        if (!identidad || !identidad.idPerfil) {
             return false;
         }
-        return idPerfil === usuario.perfil.id;
+        return idPerfil === identidad.idPerfil;
     }
 
-    public recargarToken(token: string) {
+    recargarToken(token: string) {
         this.cleanSession();
         this.procesarToken(token);
     }

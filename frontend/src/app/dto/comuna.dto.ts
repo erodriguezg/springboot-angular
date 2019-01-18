@@ -1,4 +1,4 @@
 export interface ComunaDto {
-    idComuna: number;
+    id: number;
     nombre: string;
 }

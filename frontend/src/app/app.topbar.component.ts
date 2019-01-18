@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AppTemplateComponent} from './app.template.component';
 import {AuthService} from './service/auth.service';
 import {Constantes} from './constantes';
-import {UsuarioDto} from './dto/usuario.dto';
+import { IdentidadDto } from './dto/identidad.dto';
 
 @Component({
     selector: 'app-topbar',
@@ -23,12 +23,12 @@ export class AppTopBarComponent implements OnInit {
         this.rutaLogin = Constantes.ROUTE_LOGIN;
         this.sesionIniciada = this.authService.isLogged();
         if (this.sesionIniciada) {
-            this.usuarioConectado = this.obtenerUsuarioConectado(this.authService.getUsuarioDto());
+            this.usuarioConectado = this.obtenerUsuarioConectado(this.authService.getIdentidad());
         }
     }
 
-    private obtenerUsuarioConectado(usuarioDto: UsuarioDto) {
-        return usuarioDto.persona.nombres + ' ' + usuarioDto.persona.apPaterno + ' ' + usuarioDto.persona.apMaterno;
+    private obtenerUsuarioConectado(identidad: IdentidadDto) {
+        return `${identidad.nombres} ${identidad.apPaterno} ${identidad.apMaterno}`;
     }
 
 }

@@ -15,7 +15,7 @@ import {RutConverter} from '../converters/rut.converter';
 import {UsuarioFiltroDto} from '../dto/usuario-filtro.dto';
 import {TranslateService} from '@ngx-translate/core';
 
-const _ = require('lodash');
+import * as _ from 'lodash';
 
 @Component({
     templateUrl: 'gestionar-usuarios.view.html'
@@ -70,7 +70,7 @@ export class GestionarUsuariosView implements OnInit {
     }
 
     public irEditarUsuario(usuario: UsuarioDto): void {
-        this.flashScope.add(Constantes.FS_KEY_ID_USUARIO, usuario.id);
+        this.flashScope.add(Constantes.FS_KEY_ID_USUARIO, usuario.idPersona);
         this.router.navigate([Constantes.ROUTE_EDITAR_USUARIO]);
     }
 
