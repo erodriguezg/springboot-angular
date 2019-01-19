@@ -86,7 +86,7 @@ import {AppTemplateComponent} from './app.template.component';
 
 import {InicioView} from './view/inicio.view';
 
-import {Ng2Webstorage} from 'ngx-webstorage';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 import {LoadingService} from './service/loading.service';
 import {AuthService} from './service/auth.service';
 
@@ -128,6 +128,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
     imports: [
         BrowserModule,
+        NgxWebstorageModule.forRoot(),
         FormsModule,
         ReactiveFormsModule,
         AppRoutes,
@@ -259,7 +260,6 @@ export function HttpLoaderFactory(http: HttpClient) {
             provide: LocationStrategy,
             useClass: HashLocationStrategy
         },
-        Ng2Webstorage,
         // Guards
         AuthentificatedGuard,
         PermitAllGuard,

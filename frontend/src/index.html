@@ -11,6 +11,13 @@
 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<link rel="icon" type="image/x-icon" href="assets/images/favicon.png" />
+	<!-- https://github.com/aws/aws-amplify/issues/678 fix: -->
+	<script>
+		if (global === undefined) {
+		var global = window;
+		}
+  	</script>
+  	<!-- https://github.com/aws/aws-amplify/issues/678 fix end-->
 </head>
 <body>
 	<app-root>

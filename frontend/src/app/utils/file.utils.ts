@@ -36,7 +36,7 @@ export class FileUtils {
         archivoOut.fileName = file.name;
         myReader.onloadend = (e) => {
             const re = /^data:(.+)\;base64,(.+)/;
-            const reEval = re.exec(myReader.result);
+            const reEval = re.exec(myReader.result as string);
             archivoOut.contentType = reEval[1];
             archivoOut.dataB64 = reEval[2];
             callback(archivoOut);
