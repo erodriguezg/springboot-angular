@@ -1,16 +1,26 @@
 package com.github.erodriguezg.springbootangular.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.erodriguezg.springbootangular.entities.PerfilUsuario;
 import com.github.erodriguezg.springbootangular.entities.Persona;
 import com.github.erodriguezg.springbootangular.entities.Usuario;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
-public class Identidad implements Serializable {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Identidad implements UserDetails {
 
     private Long idPersona;
 
     private String username;
+
+    private String password;
 
     private Integer run;
 
@@ -28,10 +38,14 @@ public class Identidad implements Serializable {
 
     private boolean habilitado;
 
-    public Identidad(){ }
+    @JsonIgnore
+    private List<GrantedAuthority> authorityList;
+
+    public Identidad() {
+    }
 
     public Identidad(Usuario usuario) {
-        if(usuario == null) {
+        if (usuario == null) {
             return;
         }
         Persona persona = usuario.getPersona();
@@ -39,17 +53,24 @@ public class Identidad implements Serializable {
         this.idPersona = usuario.getIdPersona();
         this.username = usuario.getUsername();
         this.habilitado = usuario.getHabilitado();
-        if(persona != null) {
+        this.password = usuario.getPassword();
+        if (persona != null) {
             this.run = persona.getRun();
             this.email = persona.getEmail();
             this.nombres = persona.getNombres();
             this.apPaterno = persona.getApellidoPaterno();
             this.apMaterno = persona.getApellidoMaterno();
         }
-        if(perfil != null) {
+        if (perfil != null) {
             this.idPerfil = perfil.getIdPerfilUsuario();
             this.nombrePerfil = perfil.getNombre();
+            this.authorityList = Collections.singletonList(new SimpleGrantedAuthority(this.nombrePerfil));
         }
+    }
+
+    public void setNombrePerfil(String nombrePerfil) {
+        this.nombrePerfil = nombrePerfil;
+        this.authorityList = Collections.singletonList(new SimpleGrantedAuthority(this.nombrePerfil));
     }
 
     public Long getIdPersona() {
@@ -60,8 +81,47 @@ public class Identidad implements Serializable {
         this.idPersona = idPersona;
     }
 
+    @JsonIgnore
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorityList;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonExpired() {
+        return !this.habilitado;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonLocked() {
+        return !this.habilitado;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return !this.habilitado;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isEnabled() {
+        return this.habilitado;
     }
 
     public void setUsername(String username) {
@@ -120,15 +180,29 @@ public class Identidad implements Serializable {
         return nombrePerfil;
     }
 
-    public void setNombrePerfil(String nombrePerfil) {
-        this.nombrePerfil = nombrePerfil;
-    }
-
     public boolean isHabilitado() {
         return habilitado;
     }
 
     public void setHabilitado(boolean habilitado) {
         this.habilitado = habilitado;
+    }
+
+    @Override
+    public String toString() {
+        return "Identidad{" +
+                "idPersona=" + idPersona +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", run=" + run +
+                ", email='" + email + '\'' +
+                ", nombres='" + nombres + '\'' +
+                ", apPaterno='" + apPaterno + '\'' +
+                ", apMaterno='" + apMaterno + '\'' +
+                ", idPerfil=" + idPerfil +
+                ", nombrePerfil='" + nombrePerfil + '\'' +
+                ", habilitado=" + habilitado +
+                ", authorityList=" + authorityList +
+                '}';
     }
 }

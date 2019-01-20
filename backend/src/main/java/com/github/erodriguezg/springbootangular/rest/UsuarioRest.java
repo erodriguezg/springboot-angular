@@ -6,11 +6,11 @@ import com.github.erodriguezg.springbootangular.entities.Usuario;
 import com.github.erodriguezg.springbootangular.security.Identidad;
 import com.github.erodriguezg.springbootangular.services.UsuarioService;
 import com.github.erodriguezg.springbootangular.utils.PropertyUtils;
+import com.github.erodriguezg.springbootangular.utils.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +29,9 @@ public class UsuarioRest {
 
     @Autowired
     private PropertyUtils propertyUtils;
+
+    @Autowired
+    private SecurityUtils securityUtils;
 
     @GetMapping("/id/{idUsuario}")
     public Usuario traerPorId(@PathVariable("idUsuario") Long idUsuario) {
@@ -76,8 +79,7 @@ public class UsuarioRest {
     }
 
     @PostMapping("/guardar")
-    public void guardar(@RequestBody @Valid GuardarUsuarioDto guardarUsuarioDto, BindingResult bindResult, @AuthenticationPrincipal Identidad identidad) {
-        log.debug("-> principal: {}", identidad);
+    public void guardar(@RequestBody @Valid GuardarUsuarioDto guardarUsuarioDto, BindingResult bindResult) {
         if (bindResult.hasErrors()) {
             log.warn("Error de entrada: {}", bindResult.getAllErrors());
             throw new IllegalArgumentException(bindResult.getAllErrors().toString());
@@ -92,7 +94,8 @@ public class UsuarioRest {
     }
 
     @PostMapping("/eliminar")
-    public void eliminar(@RequestParam("idUsuario") Long idUsuario, @AuthenticationPrincipal Identidad identidad) {
+    public void eliminar(@RequestParam("idUsuario") Long idUsuario) {
+        Identidad identidad = securityUtils.getActualIdentidad();
         log.debug("-> principal: {}", identidad);
         Usuario usuario = new Usuario();
         usuario.setIdPersona(idUsuario);

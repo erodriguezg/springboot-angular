@@ -8,11 +8,11 @@ import com.github.erodriguezg.springbootangular.entities.Usuario;
 import com.github.erodriguezg.springbootangular.security.Identidad;
 import com.github.erodriguezg.springbootangular.services.UsuarioService;
 import com.github.erodriguezg.springbootangular.utils.ConstantesUtil;
+import com.github.erodriguezg.springbootangular.utils.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +40,9 @@ public class SecurityRest {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private SecurityUtils securityUtils;
 
     @PostMapping("/login")
     @PreAuthorize("permitAll()")
@@ -87,8 +90,9 @@ public class SecurityRest {
 
     @PostMapping("/refreshToken")
     @PreAuthorize("isAuthenticated()")
-    public RefreshTokenDto refreshToken(@AuthenticationPrincipal Identidad identidad) {
+    public RefreshTokenDto refreshToken() {
         try {
+            Identidad identidad = securityUtils.getActualIdentidad();
             String token = this.tokenService.create(identidad);
             RefreshTokenDto refreshTokenDto = new RefreshTokenDto();
             refreshTokenDto.setToken(token);

@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
@@ -23,11 +20,8 @@ public class TokenSecurityConfig {
             TokenService<Identidad> tokenService) {
         return new TokenAuthenticationHttpHandler<>(
                 tokenService,
-                identidad -> {
-                    List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
-                    authorityList.add(new SimpleGrantedAuthority(identidad.getNombrePerfil()));
-                    return new UsernamePasswordAuthenticationToken(identidad, null, authorityList);
-                },
+                identidad -> new UsernamePasswordAuthenticationToken(
+                        identidad, identidad.getPassword(), identidad.getAuthorities()),
                 authentication -> (Identidad) authentication.getPrincipal()
         );
     }
