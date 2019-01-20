@@ -8,11 +8,11 @@
     <span *ngIf="sesionIniciada">Bienvenido {{usuarioConectado}}</span>
 
     <a *ngIf="sesionIniciada" href="#/{{rutaLogout}}">
-        <button pButton type="button" label="Cerrar Sesión" iconPos="right" icon="fa-sign-out" class="topbar-button"></button>
+        <button pButton type="button" label="Cerrar Sesión" iconPos="right" icon="pi pi-sign-out" class="topbar-button"></button>
     </a>
 
     <a *ngIf="!sesionIniciada" href="#/{{rutaLogin}}">
-        <button pButton type="button" label="Iniciar Sesión" iconPos="right" icon="fa-sign-in" class="topbar-button"></button>
+        <button pButton type="button" label="Iniciar Sesión" iconPos="right" icon="pi pi-sign-in" class="topbar-button"></button>
     </a>
 
 </div>

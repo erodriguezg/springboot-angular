@@ -185,9 +185,9 @@
 
                 <p-column [style]="{'width':'116px'}" class="btn_actions">
                     <ng-template let-user="rowData" pTemplate type="body">
-                        <button type="button" pButton (click)="abrirDialogCambiarPass(user)" icon="fa-key"></button>
-                        <button type="button" pButton (click)="irEditarUsuario(user)" icon="fa-edit"></button>
-                        <button type="button" pButton (click)="confirmarEliminar(user)" icon="fa-remove"></button>
+                        <button type="button" pButton (click)="abrirDialogCambiarPass(user)" icon="pi pi-key"></button>
+                        <button type="button" pButton (click)="irEditarUsuario(user)" icon="pi pi-pencil"></button>
+                        <button type="button" pButton (click)="confirmarEliminar(user)" icon="pi pi-trash"></button>
                     </ng-template>
                 </p-column>
             </p-dataTable>

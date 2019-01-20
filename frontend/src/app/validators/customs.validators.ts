@@ -237,4 +237,5 @@ const rutValidator = {
         }
         return false;
     }
-}
+};
+

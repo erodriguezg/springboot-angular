@@ -33,7 +33,7 @@ export class Constantes {
         return <SelectItem>{label: 'Todos', value: null};
     }
 
-    public static createHabilitadosSelectItems(): SelectItem[] {
+    static createHabilitadosSelectItems(): SelectItem[] {
         return [
             Constantes.createTodosSelectItem(),
             {label: 'habilitado', value: true},

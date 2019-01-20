@@ -28,7 +28,7 @@
             <div class="ui-g-12 ui-md-6 ui-lg-3">
                 <div class="form-group">
                     <label for="perfil">Perfil</label>
-                    <p-dropdown id="perfil" [options]="perfilesSelectItems" formControlName="perfil" class="d-block"></p-dropdown>
+                    <p-dropdown id="perfil" [options]="perfilesSelectItems" formControlName="perfil" class="d-block" ></p-dropdown>
                     <div class="ui-message ui-messages-error ui-corner-all"
                          [hidden]="formUsuario.controls.perfil.valid || (formUsuario.controls.perfil.pristine && !submitted)">
                         <i class="fa fa-close"></i>
