@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+/* PrimeNG */
+
 .ui-widget {
     &.ui-datepicker {
         font-size: 0.8em;
@@ -16,3 +19,8 @@
     }
 }
 
+.ui-message {
+    &.ui-messages-error {
+        background-color: #ffcccc
+    }
+}
