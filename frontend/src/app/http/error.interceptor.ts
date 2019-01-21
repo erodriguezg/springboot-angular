@@ -3,11 +3,15 @@ import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {GlobalMessageService} from '../service/global-message.service';
+import { AuthService } from '../service/auth.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-    constructor(private router: Router, private globalMessageService: GlobalMessageService) {}
+    constructor(
+        private router: Router, 
+        private globalMessageService: GlobalMessageService,
+        private authService: AuthService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req)
@@ -15,6 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 switch (errorResponse.status) {
                     case 403:
                     case 401:
+                        this.authService.logoutNoNavigate();
                         this.router.navigate(['/']);
                         break;
                     case 500:

@@ -13,7 +13,7 @@ import {AuthService} from './service/auth.service';
             <p *ngIf="!countdown">Su sesión ha expirado</p>
             <footer *ngIf="timeout">
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <button type="button" pButton icon="fa-check" (click)="expired()" label="Ok"></button>
+                    <button type="button" pButton icon="pi pi-check" (click)="expired()" label="Ok"></button>
                 </div>
             </footer>
         </p-dialog>

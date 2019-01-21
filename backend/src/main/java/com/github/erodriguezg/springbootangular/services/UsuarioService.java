@@ -72,6 +72,7 @@ public class UsuarioService {
         if (usuarioAux == null) {
             em.persist(usuario);
         } else {
+            usuario.setHabilitado(usuarioAux.getHabilitado());
             usuario = em.merge(usuario);
         }
         return usuario;
@@ -88,7 +89,9 @@ public class UsuarioService {
 
     public List<Usuario> buscar(UsuarioFiltroDto filtroDto, int inicio, int fin) {
         Specification<Usuario> userSpecification = usuarioRepository.filtroToSpecification(filtroDto);
-        return usuarioRepository.findAll(userSpecification, PageRequest.of(inicio, fin - inicio))
+        int pageSize = fin - inicio;
+        int paginaActual = inicio / pageSize;
+        return usuarioRepository.findAll(userSpecification, PageRequest.of(paginaActual, pageSize))
                 .getContent();
     }
 

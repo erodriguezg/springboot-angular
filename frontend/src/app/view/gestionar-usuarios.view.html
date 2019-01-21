@@ -138,7 +138,7 @@
                 <button type="button" pButton (click)="irNuevoUsuario()">Nuevo Usuario</button>
             </div>
 
-            <p-dataTable *ngIf="tablaResultadosVisible" [value]="usuarios" rows="15" [paginator]="true" [responsive]="true"
+            <p-dataTable *ngIf="tablaResultadosVisible" [value]="usuarios" [paginator]="true" [responsive]="true"
                          [lazy]="true" (onLazyLoad)="loadBusquedaLazy($event)" [rows]="10" [totalRecords]="busquedaRowCount"
                          emptyMessage="No se encontraron usuarios">
                 <header>Usuarios</header>

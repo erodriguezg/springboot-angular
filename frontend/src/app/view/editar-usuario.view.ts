@@ -181,6 +181,7 @@ export class EditarUsuarioView implements OnInit {
         usuarioDto.perfil = this.formUsuario.get('perfil').value;
         usuarioDto.habilitado = this.formUsuario.get('habilitado').value;
         usuarioDto.password = this.modoEditar ? this.usuarioEntrada.password : this.formUsuario.get('password').value;
+        usuarioDto.persona.idPersona = usuarioDto.idPersona;
         usuarioDto.persona.fechaNacimiento = this.formUsuario.get('fechaNacimiento').value;
         usuarioDto.persona.email = this.formUsuario.get('email').value;
         usuarioDto.persona.apellidoPaterno = this.formUsuario.get('apPaterno').value;

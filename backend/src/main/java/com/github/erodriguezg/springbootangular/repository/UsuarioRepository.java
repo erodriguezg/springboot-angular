@@ -100,7 +100,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>, JpaSpec
 
     default void addSpecUsername(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Root<Usuario> user) {
         if (StringUtils.isNotBlank(filtroDto.getUsername())) {
-            predicates.add(cb.like(user.get("username"), "%" + filtroDto.getNombres() + "%"));
+            predicates.add(cb.like(user.get("username"), "%" + filtroDto.getUsername() + "%"));
         }
     }
 
