@@ -14,6 +14,7 @@ import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { ConfirmationService } from 'primeng/api';
 
 /* Translate */
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -60,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     HttpClient,
+    ConfirmationService,
   // HTTP INTERCEPTORS
   {
     provide: HTTP_INTERCEPTORS,
