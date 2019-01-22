@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TemplateComponent } from '../template/template.component';
-import { AuthService } from '../services/auth.service';
-import { ConstantesUtils } from '../utils/constantes.utils';
-import { IdentidadDto } from '../dto/identidad.dto';
+import { AuthService } from '../../core/services/auth.service';
+import { ConstantesUtils } from '../../core/utils/constantes.utils';
+import { IdentidadDto } from '../../core/dto/identidad.dto';
 
 @Component({
   selector: 'app-topbar',

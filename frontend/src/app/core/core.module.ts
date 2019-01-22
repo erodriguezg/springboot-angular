@@ -6,13 +6,9 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { RutTextPipe } from './pipes/ruttext.pipe';
 import { BlockuiComponent } from './blockui/blockui.component';
 import { ShellComponent } from './shell/shell.component';
-import { FooterComponent } from './footer/footer.component';
 import { GlobalMessageComponent } from './global-message/global-message.component';
 import { IdleDetectorComponent } from './idle-detector/idle-detector.component';
-import { MenuComponent, SubMenuComponent } from './menu/menu.component';
-import { TemplateComponent } from './template/template.component';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
-import { TopbarComponent } from './topbar/topbar.component';
 
 /* primeng */
 import { DialogModule } from 'primeng/dialog';
@@ -35,14 +31,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     RutTextPipe,
     BlockuiComponent,
     ShellComponent,
-    FooterComponent,
     GlobalMessageComponent,
     IdleDetectorComponent,
-    MenuComponent,
-    SubMenuComponent,
-    TemplateComponent,
     ScrollTopComponent,
-    TopbarComponent
   ],
   imports: [
     /* primeng */

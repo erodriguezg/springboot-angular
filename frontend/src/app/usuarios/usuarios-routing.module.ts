@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TemplateComponent } from '../core/template/template.component';
+import { TemplateComponent } from '../shared-template/template/template.component';
 import { AuthentificatedGuard } from '../core/guards/authentificated.guard';
 
 import { IndexComponent } from './index/index.component';

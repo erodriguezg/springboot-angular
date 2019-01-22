@@ -2,8 +2,8 @@ import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/cor
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MenuItem, ScrollPanel } from 'primeng/primeng';
 import { TemplateComponent } from '../template/template.component';
-import { ConstantesUtils } from '../utils/constantes.utils';
-import { AuthService } from '../services/auth.service';
+import { ConstantesUtils } from '../../core/utils/constantes.utils';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-menu',
