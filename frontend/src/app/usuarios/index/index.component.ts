@@ -194,7 +194,6 @@ export class IndexComponent implements OnInit {
   }
 
   private initCalendar(): void {
-      const present: Date = new Date();
       this.maxDate = new Date();
       this.minDate = new Date();
       this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);

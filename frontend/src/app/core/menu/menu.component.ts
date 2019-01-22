@@ -2,8 +2,8 @@ import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/cor
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MenuItem, ScrollPanel } from 'primeng/primeng';
 import { TemplateComponent } from '../template/template.component';
-import { ConstantesUtils } from '../../core/utils/constantes.utils';
-import { AuthService } from '../../core/services/auth.service';
+import { ConstantesUtils } from '../utils/constantes.utils';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -120,7 +120,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
       ])
   ]
 })
-export class AppSubMenuComponent {
+export class SubMenuComponent {
 
   @Input() item: MenuItem;
 
@@ -142,7 +142,7 @@ export class AppSubMenuComponent {
 
       // activate current item and deactivate active sibling if any
       if (item.routerLink || item.items || item.command || item.url) {
-          this.activeIndex = (this.activeIndex as number === index) ? -1 : index;
+          this.activeIndex = (this.activeIndex === index) ? -1 : index;
       }
 
       // execute command
