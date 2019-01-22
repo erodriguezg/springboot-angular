@@ -1,0 +1,10 @@
+<p-dialog header="Inactivo" [(visible)]="display" [draggable]="false" [closable]="false"
+          [resizable]="false" [closeOnEscape]="true" modal="modal" width="300" responsive="true">
+    <p *ngIf="countdown">Su sesión expirará por inactivad en {{countdown}} segundos</p>
+    <p *ngIf="!countdown">Su sesión ha expirado</p>
+    <footer *ngIf="timeout">
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-check" (click)="expired()" label="Ok"></button>
+        </div>
+    </footer>
+</p-dialog>

@@ -1,7 +1,12 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {ENVIRONMENT} from 'environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { ENVIRONMENT } from '../../../environments/environment';
 
+
+@Injectable({
+    providedIn: 'root'
+  })
 export class ApiUrlInterceptor implements HttpInterceptor {
 
     private static seDebeAgregarPrefijoApi(req: HttpRequest<any>): boolean {

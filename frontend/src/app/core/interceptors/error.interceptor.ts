@@ -2,14 +2,16 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {GlobalMessageService} from '../service/global-message.service';
-import { AuthService } from '../service/auth.service';
+import {GlobalMessageService} from '../services/global-message.service';
+import { AuthService } from '../services/auth.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class ErrorInterceptor implements HttpInterceptor {
 
     constructor(
-        private router: Router, 
+        private router: Router,
         private globalMessageService: GlobalMessageService,
         private authService: AuthService) {}
 

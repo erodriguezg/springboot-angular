@@ -1,0 +1,15 @@
+<p-dialog [header]="title" [visible]="dialogVisible"
+          [class]="classes"
+          [width]="285"
+          [closable]="false" [modal]="true">
+
+    <div class="message">
+        {{message}}
+    </div>
+
+    <p-footer>
+        <button pButton (click)="cerrarDialog()"
+                class="btn btn-default" title=""
+                label="{{ 'labels.cerrar' | translate }}"></button>
+    </p-footer>
+</p-dialog>

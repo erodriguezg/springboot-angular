@@ -1,9 +1,11 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
-import {BlockuiService} from '../service/blockui.service';
+import {BlockuiService} from '../services/blockui.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class BlockuiInterceptor implements HttpInterceptor {
 
     constructor(private blockuiService: BlockuiService) {
