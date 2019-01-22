@@ -2,16 +2,6 @@ import { SelectItem } from 'primeng/api';
 
 export class ConstantesUtils {
 
-    /* routes */
-    static readonly ROUTE_INICIO: string = '';
-    static readonly ROUTE_GESTIONAR_USUARIOS: string = 'gestionar-usuarios';
-    static readonly ROUTE_EDITAR_USUARIO: string = 'editar-usuario';
-    static readonly ROUTE_LOGIN: string = 'login';
-    static readonly ROUTE_EXITO_LOGIN: string = 'exito-login';
-    static readonly ROUTE_EXITO_LOGOUT: string = 'exito-logout';
-    static readonly ROUTE_LOGOUT: string = 'logout';
-    static readonly ROUTE_SHOWCASE: string = 'showcase';
-
     /* messages */
     static readonly MSJ_SIN_RESULTADOS_FILTROS = 'No se encontraron resultados';
 
@@ -35,7 +25,7 @@ export class ConstantesUtils {
 
     static createHabilitadosSelectItems(): SelectItem[] {
         return [
-            Constantes.createTodosSelectItem(),
+            ConstantesUtils.createTodosSelectItem(),
             {label: 'habilitado', value: true},
             {label: 'deshabilitado', value: false}
         ];
