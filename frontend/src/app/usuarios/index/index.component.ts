@@ -200,7 +200,7 @@ export class IndexComponent implements OnInit {
       this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
       this.minDate.setFullYear(this.minDate.getFullYear() - 90);
       this.yearRange = this.minDate.getFullYear() + ':' + this.maxDate.getFullYear();
-      this.calLocale = Locale.getCalendarEs();
+      this.calLocale = LocaleUtils.getCalendarEs();
   }
 
   private refrescarTablaResultados(): void {

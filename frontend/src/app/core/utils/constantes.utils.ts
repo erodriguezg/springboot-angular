@@ -2,6 +2,14 @@ import { SelectItem } from 'primeng/api';
 
 export class ConstantesUtils {
 
+    /* routes */
+    static readonly ROUTE_INICIO: string = '';
+    static readonly ROUTE_SHOWCASE: string = 'showcase';
+    static readonly ROUTE_GESTIONAR_USUARIOS: string = 'usuarios';
+    static readonly ROUTE_EDITAR_USUARIO: string = 'usuarios/editar';
+    static readonly ROUTE_LOGIN: string = 'login';
+    static readonly ROUTE_LOGOUT: string = 'logout';
+
     /* messages */
     static readonly MSJ_SIN_RESULTADOS_FILTROS = 'No se encontraron resultados';
 
