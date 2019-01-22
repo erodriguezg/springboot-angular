@@ -7,6 +7,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SharedTemplateModule } from '../shared-template/shared-template.module';
 
 /* primeng */
+import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +25,7 @@ import { GrowlModule } from 'primeng/components/growl/growl';
     HomeRoutingModule,
     SharedTemplateModule,
     /* primeng */
+    ButtonModule,
     InputTextModule,
     ToastModule,
     GrowlModule

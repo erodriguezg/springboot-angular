@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -20,6 +20,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgIdleModule } from '@ng-idle/core';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { ApiUrlInterceptor } from './interceptors/api-url.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { BlockuiInterceptor } from './interceptors/blockui.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 /* AoT requires an exported function for factories */
 export function HttpLoaderFactory(http: HttpClient) {
@@ -54,7 +58,34 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
   })
   ],
-  providers: [ HttpClient],
+  providers: [
+    HttpClient,
+  // HTTP INTERCEPTORS
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ApiUrlInterceptor,
+    multi: true
+},
+{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+},
+{
+    provide: HTTP_INTERCEPTORS,
+    useClass: BlockuiInterceptor,
+    multi: true
+},
+{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
+    multi: true
+},
+// Others
+{
+    provide: LocationStrategy,
+    useClass: HashLocationStrategy
+}],
   exports: [
     RutTextPipe,
     ShellComponent]

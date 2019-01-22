@@ -7,7 +7,9 @@ import { FooterComponent } from './footer/footer.component';
 import { TopbarComponent } from './topbar/topbar.component';
 
 /* primeng */
-import { ScrollPanelModule } from 'primeng/primeng';
+
+import {ButtonModule} from 'primeng/button';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 
 @NgModule({
@@ -16,6 +18,7 @@ import { ScrollPanelModule } from 'primeng/primeng';
     CommonModule,
     RouterModule,
     /*primeng*/
+    ButtonModule,
     ScrollPanelModule
   ],
   exports: [TemplateComponent]
