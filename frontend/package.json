@@ -1,15 +1,15 @@
 {
-  "name": "angular-app",
-  "version": "0.0.1",
+  "name": "frontend-app",
+  "version": "2.0.0",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build-prod": "yarn install && ng build --prod",
-    "build-dev": "yarn install && ng build -dev --aot -oh all",
-    "build-dev-verbose": "yarn install && ng build -dev --verbose",
-    "build-qa": "yarn install && ng build --env=qa --aot -oh all",
-    "test": "yarn install && ng test",
+    "build-prod": "npm install && ng build --prod",
+    "build-dev": "npm install && ng build -dev --aot -oh all",
+    "build-dev-verbose": "npm install && ng build -dev --verbose",
+    "build-qa": "npm install && ng build --env=qa --aot -oh all",
+    "test": "npm install && ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

@@ -5,6 +5,7 @@ app:
   url:
     backend: http://localhost:8080
     frontend: http://localhost:4200
+  version: @project.version@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/springboot-angular
