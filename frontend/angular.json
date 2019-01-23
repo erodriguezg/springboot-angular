@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ultima-cli": {
+    "frontend-app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -84,21 +84,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ultima-cli:build"
+            "browserTarget": "frontend-app:build"
           },
           "configurations": {
             "qa": {
-              "browserTarget": "ultima-cli:build:qa"
+              "browserTarget": "frontend-app:build:qa"
             },
             "production": {
-              "browserTarget": "ultima-cli:build:production"
+              "browserTarget": "frontend-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ultima-cli:build"
+            "browserTarget": "frontend-app:build"
           }
         },
         "test": {
@@ -150,7 +150,7 @@
         }
       }
     },
-    "ultima-cli-e2e": {
+    "frontend-app-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -159,7 +159,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ultima-cli:serve"
+            "devServerTarget": "frontend-app:serve"
           }
         },
         "lint": {
@@ -176,7 +176,7 @@
       }
     }
   },
-  "defaultProject": "ultima-cli",
+  "defaultProject": "frontend-app",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

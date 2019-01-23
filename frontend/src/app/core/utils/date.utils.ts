@@ -1,15 +1,15 @@
 export class DateUtils {
 
-    public static parcheFecha12Horas(date: Date) : Date {
-        if(!date) {
+    public static parcheFecha12Horas(date: Date): Date {
+        if (!date) {
             return null;
         }
-        let salidaDate : Date = new Date(date);
+        const salidaDate: Date = new Date(date);
         salidaDate.setHours(12);
         return salidaDate;
     }
 
-    public static createUTC(dateInput : Date) : Date {
+    public static createUTC(dateInput: Date): Date {
         return new Date(Date.UTC(
             dateInput.getFullYear(),
             dateInput.getMonth(),
