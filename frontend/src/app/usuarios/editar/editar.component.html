@@ -1,0 +1,187 @@
+<div class="container">
+
+  <form *ngIf="formUsuario" [formGroup]="formUsuario">
+
+      <h1 *ngIf="modoEditar">Editar Usuario</h1>
+      <h1 *ngIf="!modoEditar">Crear Usuario</h1>
+
+      <h4>Datos de cuenta</h4>
+
+      <div class="ui-g">
+          <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="form-group">
+                  <label for="username">Nombre usuario</label><i class="fa fa-info-circle info-btn" pTooltip="{{ 'info.tooltip.username' | translate }}"></i>
+                  <input type="text" pInputText class="form-control" id="username" formControlName="username"/>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       [hidden]="formUsuario.controls.username.valid || (formUsuario.controls.username.pristine && !submitted)">
+                      <i class="fa fa-close"></i>
+                      <span *ngIf="formUsuario.controls.username.pending">{{ 'info.input.procesando' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.username.hasError('usernameUnico')">{{ 'error.input.usernameUnico' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.username.hasError('required')">{{ 'error.input.required' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.username.hasError('minlength')">{{ 'error.input.minlength' | translate:{p1:4} }}</span>
+                      <span *ngIf="formUsuario.controls.username.hasError('maxlength')">{{ 'error.input.maxlength' | translate:{p1:20} }}</span>
+                      <span *ngIf="formUsuario.controls.username.hasError('validateUsername')">{{ 'error.input.validateUsername' | translate }}</span>
+                  </div>
+              </div>
+          </div>
+
+          <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="form-group">
+                  <label for="perfil">Perfil</label>
+                  <p-dropdown id="perfil" [options]="perfilesSelectItems" formControlName="perfil" class="d-block" ></p-dropdown>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       [hidden]="formUsuario.controls.perfil.valid || (formUsuario.controls.perfil.pristine && !submitted)">
+                      <i class="fa fa-close"></i>
+                      <span *ngIf="formUsuario.controls.perfil.hasError('required')">{{ 'error.input.required' | translate }}</span>
+                  </div>
+              </div>
+          </div>
+
+          <div *ngIf="!modoEditar" class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="form-group">
+                  <label for="password">Contraseña</label>
+                  <input pInputText type="password" class="form-control" id="password" formControlName="password"/>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       [hidden]="formUsuario.controls.password.valid || (formUsuario.controls.password.pristine && !submitted)">
+                      <i class="fa fa-close"></i>
+                      <span *ngIf="formUsuario.controls.password.hasError('required')">{{ 'error.input.required' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.password.hasError('minlength')">{{ 'error.input.minlength' | translate:{p1:8} }}</span>
+                      <span *ngIf="formUsuario.controls.password.hasError('maxlength')">{{ 'error.input.maxlength' | translate:{p1:20} }}</span>
+                  </div>
+              </div>
+          </div>
+
+          <div *ngIf="!modoEditar" class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="form-group">
+                  <label for="confirmPassword">Confirmar Contraseña</label>
+                  <input pInputText type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"/>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       [hidden]="formUsuario.controls.confirmPassword.valid || (formUsuario.controls.confirmPassword.pristine && !submitted)">
+                      <i class="fa fa-close"></i>
+                      <span *ngIf="formUsuario.controls.confirmPassword.hasError('required')">{{ 'error.input.required' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.confirmPassword.hasError('notEqualsPasswords')">{{ 'error.input.notEqualsPasswords' | translate }}</span>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+      <hr/>
+
+      <h4>Datos personales</h4>
+
+      <div class="ui-g">
+
+          <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="form-group">
+                  <label for="run">RUN</label>
+                  <input type="text" pInputText class="form-control" id="run" formControlName="run"/>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       [hidden]="formUsuario.controls.run.valid || (formUsuario.controls.run.pristine && !submitted)">
+                      <i class="fa fa-close"></i>
+                      <span *ngIf="formUsuario.controls.run.pending">{{ 'info.input.procesando' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.run.hasError('runUnico')">{{ 'error.input.runUnico' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.run.hasError('required')">{{ 'error.input.required' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.run.hasError('validateRUN')">{{ 'error.input.validateRUN' | translate }}</span>
+                  </div>
+              </div>
+          </div>
+
+          <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="form-group">
+                  <label for="nombres">Nombres</label>
+                  <input type="text" pInputText class="form-control" id="nombres" formControlName="nombres"/>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       [hidden]="formUsuario.controls.nombres.valid || (formUsuario.controls.nombres.pristine && !submitted)">
+                      <i class="fa fa-close"></i>
+                      <span *ngIf="formUsuario.controls.nombres.hasError('required')">{{ 'error.input.required' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.nombres.hasError('minlength')">{{ 'error.input.minlength' | translate:{p1:2} }}</span>
+                      <span *ngIf="formUsuario.controls.nombres.hasError('maxlength')">{{ 'error.input.maxlength' | translate:{p1:100} }}</span>
+                  </div>
+              </div>
+          </div>
+
+          <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="form-group">
+                  <label for="apPaterno">Apellido Paterno</label>
+                  <input type="text" pInputText class="form-control" id="apPaterno" formControlName="apPaterno"/>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       [hidden]="formUsuario.controls.apPaterno.valid || (formUsuario.controls.apPaterno.pristine && !submitted)">
+                      <i class="fa fa-close"></i>
+                      <span *ngIf="formUsuario.controls.apPaterno.hasError('required')">{{ 'error.input.required' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.apPaterno.hasError('minlength')">{{ 'error.input.minlength' | translate:{p1:2} }}</span>
+                      <span *ngIf="formUsuario.controls.apPaterno.hasError('maxlength')">{{ 'error.input.maxlength' | translate:{p1:100} }}</span>
+                  </div>
+              </div>
+          </div>
+
+          <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="form-group">
+                  <label for="apMaterno">Apellido Materno</label>
+                  <input type="text" pInputText class="form-control" id="apMaterno" formControlName="apMaterno"/>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       [hidden]="formUsuario.controls.apMaterno.valid || (formUsuario.controls.apMaterno.pristine && !submitted)">
+                      <i class="fa fa-close"></i>
+                      <span *ngIf="formUsuario.controls.apMaterno.hasError('required')">{{ 'error.input.required' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.apMaterno.hasError('minlength')">{{ 'error.input.minlength' | translate:{p1:2} }}</span>
+                      <span *ngIf="formUsuario.controls.apMaterno.hasError('maxlength')">{{ 'error.input.maxlength' | translate:{p1:100} }}</span>
+                  </div>
+              </div>
+          </div>
+
+          <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="form-group">
+                  <label for="email">Correo electrónico</label>
+                  <input id="email" pInputText type="email" class="form-control" formControlName="email"/>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       [hidden]="formUsuario.controls.email.valid || (formUsuario.controls.email.pristine && !submitted)">
+                      <i class="fa fa-close"></i>
+                      <span *ngIf="formUsuario.controls.email.pending">{{ 'info.input.procesando' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.email.hasError('emailUnico')">{{ 'error.input.emailUnico' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.email.hasError('required')">{{ 'error.input.required' | translate }}</span>
+                      <span *ngIf="formUsuario.controls.email.hasError('maxlength')">{{ 'error.input.maxlength' | translate:{p1:100} }}</span>
+                      <span *ngIf="formUsuario.controls.email.hasError('validateEmail')">{{ 'error.input.validateEmail' | translate }}</span>
+                  </div>
+              </div>
+          </div>
+
+          <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="form-group">
+                  <label for="fechaNacimiento">Fecha de Nacimiento</label><i class="fa fa-info-circle info-btn" pTooltip="{{ 'info.tooltip.calendarMayor18Anios' | translate }}"></i>
+                  <p-calendar id="fechaNacimiento" formControlName="fechaNacimiento" [locale]="calLocale"
+                              [showIcon]="true" dateFormat="dd/mm/yy" showButtonBar="true"
+                              [monthNavigator]="true" [yearNavigator]="true" [yearRange]="yearRange"
+                              [minDate]="minDate" [maxDate]="maxDate" readonlyInput="true"></p-calendar>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       [hidden]="formUsuario.controls.fechaNacimiento.valid || (formUsuario.controls.fechaNacimiento.pristine && !submitted)">
+                      <i class="fa fa-close"></i>
+                      <span *ngIf="formUsuario.controls.fechaNacimiento.hasError('required')">{{ 'error.input.required' | translate }}</span>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+      <div class="botonera">
+          <button pButton (click)="volver()" class="btn btn-default" title="" label="{{ 'labels.cancelar' | translate }}"></button>
+          <button pButton (click)="confirmAceptar()" class="btn btn-success" title="" label="{{ 'labels.aceptar' | translate }}"></button>
+      </div>
+
+      <p-dialog header="{{'dialogs.info.title' | translate }}" [(visible)]="exitoDialogoVisible" [closable]="false" [modal]="true" >
+          <p>El Registro de usuario se ha realizado con éxito</p>
+          <p-footer>
+              <a (click)="volver()" class="btn btn-success" title="">{{ 'labels.aceptar' | translate }}</a>
+          </p-footer>
+      </p-dialog>
+
+      <p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="425" #cd>
+          <p-footer>
+              <button type="button" pButton icon="pi pi-times" label="{{ 'labels.cancelar' | translate }}" (click)="cd.reject()"></button>
+              <button type="button" pButton icon="pi pi-check" label="{{ 'labels.aceptar' | translate }}" (click)="cd.accept()"></button>
+          </p-footer>
+      </p-confirmDialog>
+
+      <p-growl [(value)]="msgs"></p-growl>
+
+  </form>
+</div>

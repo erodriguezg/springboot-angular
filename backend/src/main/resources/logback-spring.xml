@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <springProperty scope="context" name="GRAYLOG_UDP_HOST" source="app.graylog.udp.host" defaultValue="localhost" />
+
+    <springProperty scope="context" name="GRAYLOG_UDP_PORT" source="app.graylog.udp.port" defaultValue="12201" />
+
+    <springProperty scope="context" name="ACTIVE_PROFILE" source="spring.profiles.active"/>
+
+    <springProfile name="DEV,CI">
+        <root level="INFO" additivity="false" >
+            <appender-ref ref="CONSOLE"/>
+        </root>
+        <logger name="com.github.erodriguezg" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+    </springProfile>
+
+    <springProfile name="QA,PROD">
+        <appender name="GELF" class="biz.paluch.logging.gelf.logback.GelfLogbackAppender">
+            <host>udp:${GRAYLOG_UDP_HOST}</host>
+            <port>${GRAYLOG_UDP_PORT}</port>
+            <version>1.1</version>
+            <extractStackTrace>true</extractStackTrace>
+            <filterStackTrace>true</filterStackTrace>
+            <mdcProfiling>true</mdcProfiling>
+            <timestampPattern>yyyy-MM-dd HH:mm:ss,SSSS</timestampPattern>
+            <maximumMessageSize>8192</maximumMessageSize>
+
+            <!-- This are static fields -->
+            <additionalFields>lenguaje=Java,framework=spring-boot,aplicacion=SPRING_BOOT_ANGULAR,enviroment=${ACTIVE_PROFILE}</additionalFields>
+            <!-- Optional: Specify field types -->
+            <additionalFieldTypes>lenguaje=String,framework=String,aplicacion=String,enviroment=String</additionalFieldTypes>
+
+            <!-- This are fields using MDC -->
+            <mdcFields>mdcField1,mdcField2</mdcFields>
+            <dynamicMdcFields>mdc.*,(mdc|MDC)fields</dynamicMdcFields>
+            <includeFullMdc>true</includeFullMdc>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>INFO</level>
+            </filter>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="GELF"/>
+        </root>
+    </springProfile>
+
+</configuration>
