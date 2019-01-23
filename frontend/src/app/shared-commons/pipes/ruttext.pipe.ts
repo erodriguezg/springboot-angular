@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {RutConverter} from '../converters/rut.converter';
+import {RutConverter} from '../../core/converters/rut.converter';
 
 @Pipe({
     name: 'rutText'

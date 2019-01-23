@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { TranslateModule } from '@ngx-translate/core';
+
+import { SharedTemplateModule } from '../shared-template/shared-template.module';
+import { SharedCommonsModule } from '../shared-commons/shared-commons.module';
+
 import { EditarComponent } from './editar/editar.component';
 import { IndexComponent } from './index/index.component';
-import { SharedTemplateModule } from '../shared-template/shared-template.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* primeng */
 import { ButtonModule } from 'primeng/button';
@@ -15,6 +20,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { GrowlModule } from 'primeng/components/growl/growl';
 import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
+import { UsuariosRoutingModule } from './usuarios-routing.module';
 
 
 @NgModule({
@@ -25,7 +31,10 @@ import { TooltipModule } from 'primeng/tooltip';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
+    SharedCommonsModule,
     SharedTemplateModule,
+    UsuariosRoutingModule,
     /*primeng*/
     ButtonModule,
     CalendarModule,

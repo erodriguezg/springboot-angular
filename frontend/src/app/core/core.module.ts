@@ -3,7 +3,6 @@ import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/c
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 
-import { RutTextPipe } from './pipes/ruttext.pipe';
 import { BlockuiComponent } from './blockui/blockui.component';
 import { ShellComponent } from './shell/shell.component';
 import { GlobalMessageComponent } from './global-message/global-message.component';
@@ -33,7 +32,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    RutTextPipe,
     BlockuiComponent,
     ShellComponent,
     GlobalMessageComponent,
@@ -89,7 +87,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     useClass: HashLocationStrategy
 }],
   exports: [
-    RutTextPipe,
     ShellComponent]
 })
 export class CoreModule { }
