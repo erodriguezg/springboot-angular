@@ -1,4 +1,4 @@
-import {FormControl, FormGroup, ValidatorFn} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 
 export class CustomsValidators {
 
@@ -6,7 +6,7 @@ export class CustomsValidators {
         if (!formControl.value) {
             return null;
         }
-        if (rutValidator.validar(formControl.value)) {
+        if (rutValidator.validate(formControl.value)) {
             return null;
         } else {
             return {
@@ -19,7 +19,7 @@ export class CustomsValidators {
 
     static validateRun(run: string) {
         if (run != null) {
-            return rutValidator.validar(run);
+            return rutValidator.validate(run);
         } else {
             return false;
         }
@@ -41,11 +41,26 @@ export class CustomsValidators {
         }
     }
 
+    static validatePercentage(formControl: FormControl) {
+        if (!formControl.value) {
+            return null;
+        }
+        if (formControl.value <= 100) {
+            return null;
+        } else {
+            return {
+                validatePercentage: {
+                    valid: false
+                }
+            };
+        }
+    }
+
     static validateEmail(formControl: FormControl) {
         if (!formControl.value) {
             return null;
         }
-        if (emailValido(formControl.value)) {
+        if (emailIsValid(formControl.value)) {
             return null;
         } else {
             return {
@@ -61,7 +76,7 @@ export class CustomsValidators {
             const passwordInput = group.controls[passwordKey];
             const passwordConfirmationInput = group.controls[passwordConfirmationKey];
             if (passwordInput.value !== passwordConfirmationInput.value) {
-                return passwordConfirmationInput.setErrors({notEqualsPasswords: {valid: false}});
+                return passwordConfirmationInput.setErrors({ notEqualsPasswords: { valid: false } });
             }
         };
     }
@@ -70,7 +85,7 @@ export class CustomsValidators {
         if (!formControl.value) {
             return null;
         }
-        if (usernameValido(formControl.value)) {
+        if (usernameIsValid(formControl.value)) {
             return null;
         } else {
             return {
@@ -80,45 +95,54 @@ export class CustomsValidators {
             };
         }
     }
+
+    static notBlank(control: FormControl) {
+        const empty = (control.value || '').trim().length === 0;
+        return !empty ? null : {
+            notBlank: {
+                valid: false
+            }
+        };
+    }
 }
 
-function emailValido(email: string) {
+function emailIsValid(email: string) {
     const re = new RegExp(['^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)',
         '|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])',
         '|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'].join(''), 'g');
     return re.test(email);
 }
 
-function usernameValido(username: string) {
+function usernameIsValid(username: string) {
     const re = /^[a-zA-Z0-9]+$/;
     return re.test(username);
 }
 
 const rutValidator = {
 
-    formatear: function (Rut, digitoVerificador) {
-        let sRut = Rut;
-        let sRutFormateado = '';
+    format(rut, dv) {
+        let sRut = rut;
+        let sRutFormated = '';
         let sDV;
-        sRut = this.quitarFormato(sRut);
-        if (digitoVerificador) {
+        sRut = this.removeFormat(sRut);
+        if (dv) {
             sDV = sRut.charAt(sRut.length - 1);
             sRut = sRut.substring(0, sRut.length - 1);
         }
         while (sRut.length > 3) {
-            sRutFormateado = '.' + sRut.substr(sRut.length - 3) + sRutFormateado;
+            sRutFormated = `.${sRut.substr(sRut.length - 3)}${sRutFormated}`;
             sRut = sRut.substring(0, sRut.length - 3);
         }
-        sRutFormateado = sRut + sRutFormateado;
-        if (sRutFormateado !== '' && digitoVerificador) {
-            sRutFormateado += '-' + sDV;
-        } else if (digitoVerificador) {
-            sRutFormateado += sDV;
+        sRutFormated = sRut + sRutFormated;
+        if (sRutFormated !== '' && dv) {
+            sRutFormated += '-' + sDV;
+        } else if (dv) {
+            sRutFormated += sDV;
         }
-        return sRutFormateado;
+        return sRutFormated;
     },
 
-    quitarFormato: function (rut) {
+    removeFormat(rut) {
         let strRut = rut;
         while (strRut.indexOf('.') !== -1) {
             strRut = strRut.replace('.', '');
@@ -129,54 +153,50 @@ const rutValidator = {
         return strRut;
     },
 
-    digitoValido: function (dv): boolean {
-        if (dv !== '0' && dv !== '1' && dv !== '2' && dv !== '3' && dv !== '4'
+    dvIsValid(dv): boolean {
+        return !(dv !== '0' && dv !== '1' && dv !== '2' && dv !== '3' && dv !== '4'
             && dv !== '5' && dv !== '6' && dv !== '7' && dv !== '8' && dv !== '9'
-            && dv !== 'k' && dv !== 'K') {
-            return false;
-        }
-        return true;
+            && dv !== 'k' && dv !== 'K');
+
     },
 
-    digitoCorrecto: function (crut): any {
+    validateDv(crut): any {
         let rut;
         let dv;
-        const largo = crut.length;
+        const rutLength = crut.length;
         let dvr;
-        if (largo < 2) {
+        if (rutLength < 2) {
             return false;
         }
-        if (largo > 2) {
-            rut = crut.substring(0, largo - 1);
+        if (rutLength > 2) {
+            rut = crut.substring(0, rutLength - 1);
         } else {
             rut = crut.charAt(0);
         }
-        dv = crut.charAt(largo - 1);
-        this.digitoValido(dv);
+        dv = crut.charAt(rutLength - 1);
+        this.dvIsValid(dv);
         if (rut == null || dv == null) {
             return 0;
         }
 
-        dvr = this.getDigito(rut);
+        dvr = this.getDv(rut);
 
         const normDv = (dv.toLowerCase() === 'k' || dv === 0 || dv === '0') ? 'k' : dv;
-        console.log(dvr, normDv);
         return dvr.toString() === normDv || (dvr.toString() === '0' && normDv === 'k');
     },
 
-    getDigito: function (rut): any {
-        const dvr = '0';
-        let suma = 0;
+    getDv(rut): any {
+        let sum = 0;
         let mul = 2;
         for (let i = rut.length - 1; i >= 0; i--) {
-            suma = suma + rut.charAt(i) * mul;
+            sum = sum + rut.charAt(i) * mul;
             if (mul === 7) {
                 mul = 2;
             } else {
                 mul++;
             }
         }
-        const res = suma % 11;
+        const res = sum % 11;
         if (res === 1) {
             return 'k';
         } else if (res === 0) {
@@ -186,56 +206,51 @@ const rutValidator = {
         }
     },
 
-    validar: function (texto: string): boolean {
-        if (texto.indexOf('-') !== texto.length - 2) {
+    validate(text: string): boolean {
+        if (text.indexOf('-') !== text.length - 2) {
             return false;
         }
-        texto = this.quitarFormato(texto);
-        const largo = texto.length;
+        text = this.removeFormat(text);
+        const length = text.length;
 
-        // rut muy corto
-        if (largo < 2) {
+        // rut too short
+        if (length < 2) {
             return false;
         }
         // verifica que los numeros correspondan a los de rut
-        for (let i = 0; i < largo; i++) {
+        for (let i = 0; i < length; i++) {
             // numero o letra que no corresponda a los del rut
-            if (!this.digitoValido(texto.charAt(i))) {
+            if (!this.dvIsValid(text.charAt(i))) {
                 return false;
             }
         }
 
-        let invertido = '';
-        for (let i = (largo - 1), j = 0; i >= 0; i-- , j++) {
-            invertido = invertido + texto.charAt(i);
+        let reversedRut = '';
+        for (let i = (length - 1), j = 0; i >= 0; i-- , j++) {
+            reversedRut = reversedRut + text.charAt(i);
         }
-        let dtexto = '';
-        dtexto = dtexto + invertido.charAt(0);
-        dtexto = dtexto + '-';
+        let dtext = '';
+        dtext = dtext + reversedRut.charAt(0);
+        dtext = dtext + '-';
         let cnt = 0;
 
-        for (let i = 1, j = 2; i < largo; i++ , j++) {
+        for (let i = 1, j = 2; i < length; i++ , j++) {
             if (cnt === 3) {
-                dtexto = dtexto + '.';
+                dtext = dtext + '.';
                 j++;
-                dtexto = dtexto + invertido.charAt(i);
+                dtext = dtext + reversedRut.charAt(i);
                 cnt = 1;
             } else {
-                dtexto = dtexto + invertido.charAt(i);
+                dtext = dtext + reversedRut.charAt(i);
                 cnt++;
             }
         }
 
-        invertido = '';
-        for (let i = (dtexto.length - 1), j = 0; i >= 0; i-- , j++) {
-            invertido = invertido + dtexto.charAt(i);
+        reversedRut = '';
+        for (let i = (dtext.length - 1), j = 0; i >= 0; i-- , j++) {
+            reversedRut = reversedRut + dtext.charAt(i);
         }
 
-        console.log(this.digitoCorrecto(texto), texto);
-        if (this.digitoCorrecto(texto)) {
-            return true;
-        }
-        return false;
+        return !!this.validateDv(text);
     }
 };
-

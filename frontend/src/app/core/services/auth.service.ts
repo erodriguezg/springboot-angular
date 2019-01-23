@@ -11,6 +11,8 @@ import { CredencialesDto } from '../dto/credenciales.dto';
 import { HttpService } from './http.service';
 import { IdentidadDto } from '../dto/identidad.dto';
 
+import { Base64 } from 'js-base64';
+
 @Injectable({
     providedIn: 'root'
   })
@@ -108,7 +110,8 @@ export class AuthService {
     }
 
     private procesarToken(token: string) {
-        const payload = JSON.parse(atob(token.split('.')[1]));
+        const encodedPayload: string = token.split('.')[1];
+        const payload = JSON.parse(Base64.decode(encodedPayload));
         this.sesion = {
             token: token,
             iat: payload.iat,

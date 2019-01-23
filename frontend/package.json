@@ -35,6 +35,7 @@
     "fullcalendar": "3.10.0",
     "intl": "1.2.5",
     "jquery": "3.3.1",
+    "js-base64": "2.5.1",
     "lodash": "4.17.11",
     "moment": "2.23.0",
     "nanoscroller": "0.8.7",
@@ -45,7 +46,7 @@
     "rxjs": "6.3.3",
     "rxjs-compat": "^6.3.3",
     "spinkit": "1.2.5",
-    "tslib": "^1.9.0",
+    "tslib": "1.9.0",
     "web-animations-js": "2.3.1",
     "zone.js": "0.8.28"
   },
