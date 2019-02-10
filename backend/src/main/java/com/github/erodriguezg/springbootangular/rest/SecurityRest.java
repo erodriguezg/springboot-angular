@@ -98,8 +98,7 @@ public class SecurityRest {
             refreshTokenDto.setToken(token);
             return refreshTokenDto;
         } catch (RuntimeException ex) {
-            log.error("Ocurrio un error al refrescar el token: ", ex);
-            throw ex;
+            throw new IllegalStateException("Ocurrio un error al refrescar el token", ex);
         }
     }
 

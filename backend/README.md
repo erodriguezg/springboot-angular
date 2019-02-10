@@ -5,6 +5,7 @@
 1) Tener instalado Java JDK 1.8 o superior
 2) Tener instalado un IDE compatible con Maven o directamente instalar Maven
 3) Crear una base datos postgresql 9.x o superior, vacía
+4) Lombok Plugin para el IDE
 
 ## LEVANTAR AMBIENTE DESARROLLO
 1) Copiar src/main/resources/application.yml.template a src/main/resources/application.yml
@@ -16,3 +17,10 @@
 ## Documentación RestApi Con Swagger
 
 Ubicada en la url: http://localhost:8080/swagger-ui.html
+
+
+## SonarQube
+
+1) comando:
+
+mvn clean cobertura:cobertura sonar:sonar -Dsonar.host.url=https://localhost:9000 -Dsonar.login=019d1e2e04e -Dcobertura.report.format=xml
