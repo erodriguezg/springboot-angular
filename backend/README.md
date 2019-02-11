@@ -19,8 +19,9 @@
 Ubicada en la url: http://localhost:8080/swagger-ui.html
 
 
-## SonarQube
+## SonarQube (JaCoCo: Unit Test + Integration Test + Coverage)
 
-1) comando:
+1) Activar Plugin JaCoCo en SonarQube
+2) Lanzar comando Maven:
 
-mvn clean cobertura:cobertura sonar:sonar -Dsonar.host.url=https://localhost:9000 -Dsonar.login=019d1e2e04e -Dcobertura.report.format=xml
+mvn clean verify jacoco:report sonar:sonar -Dsonar.host.url=https://localhost:9000 -Dsonar.login=019d1e2e04e -Dcobertura.report.format=xml

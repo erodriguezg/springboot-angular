@@ -22,7 +22,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <sonar.cobertura.reportPath>${project.basedir}/target/site/cobertura/coverage.xml</sonar.cobertura.reportPath>
         <sonar.cpd.exclusions>
             **/rest/dto/**/*, **/services/dto/**/*, **/services/entities/**/*
         </sonar.cpd.exclusions>
@@ -283,27 +282,30 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+
+            <!-- coverage -->
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.3</version>
                 <executions>
                     <execution>
-                        <id>integration-test</id>
                         <goals>
-                            <goal>integration-test</goal>
+                            <goal>prepare-agent</goal>
                         </goals>
-                        <configuration>
-                            <skipAfterFailureCount>1</skipAfterFailureCount>
-                            <excludes>
-                                <exclude>%regex[.*Test.*|.*Not.*]</exclude>
-                            </excludes>
-                        </configuration>
                     </execution>
                     <execution>
-                        <id>verify</id>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
                         <goals>
-                            <goal>verify</goal>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+
 
         </plugins>
         <finalName>${project.artifactId}</finalName>
