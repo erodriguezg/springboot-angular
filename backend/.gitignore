@@ -1,4 +1,5 @@
 src/main/resources/application.yml
+src/main/resources/entityGenConfig.yml
 target/
 
 ### STS ###

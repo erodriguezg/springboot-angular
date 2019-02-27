@@ -306,6 +306,22 @@
                 </executions>
             </plugin>
 
+            <!-- generador entidades lombok desde base datos
+             mvn jpa-entity-generator:generateAll
+             https://github.com/smartnews/jpa-entity-generator/blob/master/sample/src/main/resources/entityGenConfig.yml
+             -->
+            <plugin>
+                <groupId>com.smartnews</groupId>
+                <artifactId>maven-jpa-entity-generator-plugin</artifactId>
+                <version>0.99.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>42.2.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
 
         </plugins>
         <finalName>${project.artifactId}</finalName>

@@ -1,0 +1,17 @@
+jdbcSettings:
+  url: "jdbc:postgresql://localhost:5432/springbootangular"
+  username: "postgres"
+  password: "postgres"
+  driverClassName: "org.postgresql.Driver"
+
+packageName: "com.github.erodriguezg.springbootangular.entities2"
+
+tableExclusionRules:
+  - tableNames: ["flyway_schema_history"]
+
+interfaceRules:
+  - interfaces: [{name: "java.io.Serializable"}]
+
+classAnnotationRules:
+  - annotations:
+      - className: "lombok.ToString"
