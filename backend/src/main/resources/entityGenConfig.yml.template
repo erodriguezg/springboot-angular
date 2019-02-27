@@ -15,3 +15,9 @@ interfaceRules:
 classAnnotationRules:
   - annotations:
       - className: "lombok.ToString"
+      - className: "lombok.EqualsAndHashCode"
+        attributes:
+          - name: "callSuper"
+            value: "false"
+          - name: "onlyExplicitlyIncluded"
+            value: "true"
