@@ -1,5 +1,7 @@
 package com.github.erodriguezg.springbootangular.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.erodriguezg.security.jwt.TokenService;
 import com.github.erodriguezg.springbootangular.entities.PerfilUsuario;
 import com.github.erodriguezg.springbootangular.entities.Usuario;
@@ -29,6 +31,14 @@ public abstract class AbstractRestIT {
         usuario.setPerfil(perfilUsuario);
         String jwt = tokenService.create(new Identidad(usuario));
         return String.format("Bearer %s", jwt);
+    }
+
+    public String stringify(Object obj) {
+        try {
+            return new ObjectMapper().writer().writeValueAsString(obj);
+        } catch (JsonProcessingException ex) {
+            throw new IllegalStateException(ex);
+        }
     }
 
 }

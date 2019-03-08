@@ -82,7 +82,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>, JpaSpec
 
     default void addSpecNombres(UsuarioFiltroDto filtroDto, List<Predicate> predicates, CriteriaBuilder cb, Path<Persona> persona) {
         if (StringUtils.isNotBlank(filtroDto.getNombres())) {
-            predicates.add(cb.like(persona.get("nombres"), "%" + filtroDto.getNombres() + "%"));
+            predicates.add(cb.like(cb.lower(persona.get("nombres")), "%" + filtroDto.getNombres().toLowerCase() + "%"));
         }
     }
 
