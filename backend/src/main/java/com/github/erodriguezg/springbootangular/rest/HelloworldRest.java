@@ -11,9 +11,4 @@ public class HelloworldRest {
         return "Hello world";
     }
 
-    @GetMapping("/hello-protected")
-    public String helloProtected() {
-        return "Hello World Protected";
-    }
-
 }

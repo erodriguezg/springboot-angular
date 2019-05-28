@@ -44,7 +44,7 @@ public class UsuarioRest {
     }
 
     @PostMapping("/email")
-    public Usuario taerPorEmail(@RequestParam("email") String email) {
+    public Usuario traerPorEmail(@RequestParam("email") String email) {
         return usuarioService.traerPorEmail(email);
     }
 

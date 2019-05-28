@@ -39,9 +39,8 @@ public class ShowcaseRest {
             Thread.sleep((long) 1000 * 5);
             log.debug("-> Despertando!");
         } catch (InterruptedException e) {
-            log.error("ocurrio un error en el sleep: ", e);
             Thread.currentThread().interrupt();
-            throw new IllegalStateException(e);
+            throw new IllegalStateException("ocurrio un error en el sleep", e);
         }
     }
 

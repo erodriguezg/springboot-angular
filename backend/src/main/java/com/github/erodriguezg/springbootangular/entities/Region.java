@@ -1,20 +1,27 @@
 package com.github.erodriguezg.springbootangular.entities;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name = "region")
+@Data
+@EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
+@ToString
 public class Region implements Serializable {
 
     private static final long serialVersionUID = -4189202485773018556L;
 
     @Id
     @Column(name = "id_region")
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @Column(name = "nombre")
@@ -27,34 +34,4 @@ public class Region implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Region region = (Region) o;
-        return Objects.equals(id, region.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

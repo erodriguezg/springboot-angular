@@ -18,3 +18,7 @@ yarn.lock
 constants_ambient.js
 ### MAC ####
 .DS_Store
+### SONARQUBE ###
+sonar-project.properties
+.scannerwork/
+*.bak
