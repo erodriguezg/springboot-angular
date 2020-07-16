@@ -36,7 +36,7 @@
     "intl": "1.2.5",
     "jquery": "3.3.1",
     "js-base64": "2.5.1",
-    "lodash": "4.17.11",
+    "lodash": "4.17.19",
     "moment": "2.23.0",
     "nanoscroller": "0.8.7",
     "ngx-webstorage": "3.0.0-beta.14",
