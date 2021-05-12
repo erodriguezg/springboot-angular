@@ -28,7 +28,7 @@
     "@ngx-translate/core": "11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
     "b64-to-blob": "1.2.19",
-    "chart.js": "2.7.3",
+    "chart.js": "2.9.4",
     "core-js": "2.6.2",
     "file-saver": "2.0.0",
     "font-awesome": "4.7.0",
