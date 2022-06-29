@@ -33,7 +33,7 @@
         <version.logstash-gelf>1.12.1</version.logstash-gelf>
         <version.swagger-2>2.9.2</version.swagger-2>
 
-        <version.apache-poi>4.0.1</version.apache-poi>
+        <version.apache-poi>4.1.1</version.apache-poi>
         <version.apache-tika>1.20</version.apache-tika>
 
         <version.commons-lang-3>3.8.1</version.commons-lang-3>
