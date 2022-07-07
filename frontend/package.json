@@ -37,7 +37,7 @@
     "jquery": "3.3.1",
     "js-base64": "2.5.1",
     "lodash": "4.17.11",
-    "moment": "2.23.0",
+    "moment": "2.29.4",
     "nanoscroller": "0.8.7",
     "ngx-webstorage": "3.0.0-beta.14",
     "primeicons": "1.0.0",
